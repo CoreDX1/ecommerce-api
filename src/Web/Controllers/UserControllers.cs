@@ -15,6 +15,7 @@ public class UserControllers : ControllerBase
     }
 
     [HttpGet]
+    [Route("name")]
     public string GetUserName()
     {
         return _userService.GetUserName();

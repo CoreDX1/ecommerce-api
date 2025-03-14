@@ -9,3 +9,9 @@
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/refint/Infrastructure.dll
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastructure.pdb
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/ref/Infrastructure.dll
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/bin/Debug/net8.0/Infrastructure.runtimeconfig.json
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastructure.csproj.AssemblyReference.cache
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastructure.genruntimeconfig.cache
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/bin/Debug/net8.0/Domain.dll
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/bin/Debug/net8.0/Domain.pdb
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastr.15EFFBFE.Up2Date
