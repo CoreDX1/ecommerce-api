@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "K3k4mzOURqg=",
+  "dgSpecHash": "Y8rdRBOPTs0=",
   "success": true,
   "projectFilePath": "/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/Infrastructure.csproj",
   "expectedPackageFiles": [
+    "/home/christian/.nuget/packages/ardalis.result/10.1.0/ardalis.result.10.1.0.nupkg.sha512",
     "/home/christian/.nuget/packages/ardalis.specification/9.0.1/ardalis.specification.9.0.1.nupkg.sha512",
     "/home/christian/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

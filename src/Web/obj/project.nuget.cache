@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "XmFoy8AL+vA=",
+  "dgSpecHash": "VmhiS9BTEWs=",
   "success": true,
   "projectFilePath": "/home/christian/Desktop/Projects/E-commerce/src/Web/Web.csproj",
   "expectedPackageFiles": [
+    "/home/christian/.nuget/packages/ardalis.result/10.1.0/ardalis.result.10.1.0.nupkg.sha512",
     "/home/christian/.nuget/packages/ardalis.specification/9.0.1/ardalis.specification.9.0.1.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.aspnetcore.openapi/8.0.13/microsoft.aspnetcore.openapi.8.0.13.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.entityframeworkcore/9.0.3/microsoft.entityframeworkcore.9.0.3.nupkg.sha512",

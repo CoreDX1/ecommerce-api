@@ -1,4 +1,5 @@
 using Application.Interface;
+using Ardalis.Result;
 using Domain.Entity;
 using TanvirArjel.EFCore.GenericRepository;
 
@@ -13,8 +14,23 @@ public class ProductsServices : IProductsServices
         _repository = repository;
     }
 
-    public Task<List<Product>> GetAllProducts()
+    public async Task<Result<List<Product>>> GetAllProducts()
     {
-        return _repository.GetListAsync<Product>();
+        List<Product> products = await _repository.GetListAsync<Product>();
+
+        if (products == null)
+            return Result.NotFound("Products not found");
+
+        return Result.Success(products, "Products retrieved successfully");
+    }
+
+    public async Task<Result<Product>> GetProductById(int productId)
+    {
+        Product product = await _repository.GetByIdAsync<Product>(productId);
+
+        if (product == null)
+            return Result.NotFound("Product not found");
+
+        return Result.Success(product, "Product retrieved successfully");
     }
 }

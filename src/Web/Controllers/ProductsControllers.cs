@@ -1,4 +1,5 @@
 using Application.Interface;
+using Ardalis.Result;
 using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,8 +18,15 @@ public class ProductsControllers : ControllerBase
 
     [HttpGet]
     [Route("all")]
-    public async Task<List<Product>> GetAllProducts()
+    public async Task<Result<List<Product>>> GetAllProducts()
     {
         return await _productsServices.GetAllProducts();
+    }
+
+    [HttpGet]
+    [Route("{productId}")]
+    public async Task<Result<Product>> GetProductById(int productId)
+    {
+        return await _productsServices.GetProductById(productId);
     }
 }
