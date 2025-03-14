@@ -15,3 +15,5 @@
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/bin/Debug/net8.0/Domain.dll
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/bin/Debug/net8.0/Domain.pdb
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastr.15EFFBFE.Up2Date
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/bin/Debug/net8.0/Application.dll
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/bin/Debug/net8.0/Application.pdb

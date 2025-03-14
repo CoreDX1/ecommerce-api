@@ -1,4 +1,5 @@
 using Application;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ var configuration = builder.Configuration;
 
 // Add application services.
 builder.Services.AddApplication();
+
+builder.Services.AddInfrastructure();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
