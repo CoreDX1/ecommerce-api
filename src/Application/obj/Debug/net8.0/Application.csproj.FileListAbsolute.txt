@@ -10,3 +10,6 @@
 /home/christian/Desktop/Projects/E-commerce/src/Application/obj/Debug/net8.0/refint/Application.dll
 /home/christian/Desktop/Projects/E-commerce/src/Application/obj/Debug/net8.0/Application.pdb
 /home/christian/Desktop/Projects/E-commerce/src/Application/obj/Debug/net8.0/ref/Application.dll
+/home/christian/Desktop/Projects/E-commerce/src/Application/bin/Debug/net8.0/Domain.dll
+/home/christian/Desktop/Projects/E-commerce/src/Application/bin/Debug/net8.0/Domain.pdb
+/home/christian/Desktop/Projects/E-commerce/src/Application/obj/Debug/net8.0/Applicat.44B5EDA2.Up2Date

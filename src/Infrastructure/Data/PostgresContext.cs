@@ -1,7 +1,8 @@
-﻿using Domain.Entity;
+﻿using System.Reflection;
+using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Models;
+namespace Infrastructure.Data;
 
 public partial class PostgresContext : DbContext
 {
@@ -31,25 +32,10 @@ public partial class PostgresContext : DbContext
             "Host=localhost; Database=postgres; Username=core; Password=index"
         );
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        modelBuilder.Entity<Category>(entity => { });
-
-        modelBuilder.Entity<Customer>(entity => { });
-
-        modelBuilder.Entity<Order>(entity => { });
-
-        modelBuilder.Entity<OrderItem>(entity => { });
-
-        modelBuilder.Entity<Payment>(entity => { });
-
-        modelBuilder.Entity<Product>(entity => { });
-
-        modelBuilder.Entity<Shipping>(entity => { });
-
-        modelBuilder.Entity<User>(entity => { });
-
-        OnModelCreatingPartial(modelBuilder);
+        OnModelCreatingPartial(builder);
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

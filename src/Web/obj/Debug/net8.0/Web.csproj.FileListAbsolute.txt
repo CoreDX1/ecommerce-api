@@ -44,3 +44,5 @@
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Application.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Application.pdb
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Domain.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Domain.pdb
