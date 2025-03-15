@@ -9,6 +9,7 @@
       "Application/1.0.0": {
         "dependencies": {
           "Ardalis.Result": "10.1.0",
+          "AutoMapper": "14.0.0",
           "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.2",
           "TanvirArjel.EFCore.GenericRepository": "6.0.4"
@@ -22,6 +23,17 @@
           "lib/net8.0/Ardalis.Result.dll": {
             "assemblyVersion": "10.1.0.0",
             "fileVersion": "10.1.0.0"
+          }
+        }
+      },
+      "AutoMapper/14.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Options": "9.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/AutoMapper.dll": {
+            "assemblyVersion": "14.0.0.0",
+            "fileVersion": "14.0.0.0"
           }
         }
       },
@@ -223,6 +235,13 @@
       "sha512": "sha512-+WgsXh+JRm0d8BZPlBUc5w0+FTda4vbWRa/IF2q4zDoRsU5BXr8w4rTbYEklZIMNgQQZTcNouR/QfBV5I/4XYQ==",
       "path": "ardalis.result/10.1.0",
       "hashPath": "ardalis.result.10.1.0.nupkg.sha512"
+    },
+    "AutoMapper/14.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
+      "path": "automapper/14.0.0",
+      "hashPath": "automapper.14.0.0.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/9.0.2": {
       "type": "package",

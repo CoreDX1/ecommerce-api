@@ -57,3 +57,4 @@
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Infrastructure.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Infrastructure.pdb
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Ardalis.Result.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/AutoMapper.dll

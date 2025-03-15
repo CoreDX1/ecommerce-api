@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WkDP0dCEtAU=",
+  "dgSpecHash": "ngsZs2uQk/w=",
   "success": true,
   "projectFilePath": "/home/christian/Desktop/Projects/E-commerce/src/Application/Application.csproj",
   "expectedPackageFiles": [
     "/home/christian/.nuget/packages/ardalis.result/10.1.0/ardalis.result.10.1.0.nupkg.sha512",
+    "/home/christian/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.entityframeworkcore/9.0.2/microsoft.entityframeworkcore.9.0.2.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.2/microsoft.entityframeworkcore.abstractions.9.0.2.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.2/microsoft.entityframeworkcore.analyzers.9.0.2.nupkg.sha512",

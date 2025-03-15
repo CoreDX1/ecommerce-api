@@ -16,7 +16,7 @@ public partial class Customer
 
     public DateTime? RegistrationDate { get; set; }
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<Order> Orders { get; set; } = [];
 
     public virtual User? User { get; set; }
 }
