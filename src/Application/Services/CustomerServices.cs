@@ -57,7 +57,7 @@ public class CustomerServices : ICustomerServices
         return await _repository.GetByIdAsync<CustomerResponseDTO>(customerId);
     }
 
-    public Task<Result> UpdateCustomer(Customer customer)
+    public Task<Result> UpdateCustomer(UpdateCustomerRequestDTO customer)
     {
         throw new NotImplementedException();
     }

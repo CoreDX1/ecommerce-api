@@ -30,4 +30,18 @@ public class CustomerControllers : ControllerBase
     {
         return await _customerServices.CreateCustomer(customer);
     }
+
+    [HttpPut("{customerId}")]
+    public async Task<Result<CustomerResponseDTO>> UpdateCustomer(
+        [FromBody] UpdateCustomerRequestDTO customer
+    )
+    {
+        return await _customerServices.UpdateCustomer(customer);
+    }
+
+    [HttpDelete("{customerId}")]
+    public async Task<Result> DeleteCustomer([FromRoute] int customerId)
+    {
+        return await _customerServices.DeleteCustomer(customerId);
+    }
 }

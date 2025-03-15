@@ -10,6 +10,6 @@ public interface ICustomerServices
     Task<Result<List<CustomerResponseDTO>>> GetAllCustomers();
     Task<Result<CustomerResponseDTO>> GetCustomerById(int customerId);
     Task<Result<CustomerResponseDTO>> CreateCustomer(CreateCustomerRequestDTO customer);
-    Task<Result> UpdateCustomer(Customer customer);
+    Task<Result> UpdateCustomer(UpdateCustomerRequestDTO customer);
     Task<Result> DeleteCustomer(int customerId);
 }

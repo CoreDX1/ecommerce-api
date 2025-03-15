@@ -29,4 +29,17 @@ public class ProductsControllers : ControllerBase
     {
         return await _productsServices.GetProductById(productId);
     }
+
+    [HttpGet]
+    [Route("product/{name}")]
+    public async Task<Result<List<Product>>> GetProductByName([FromRoute] string name)
+    {
+        return await _productsServices.GetProductByName(name);
+    }
+
+    [HttpDelete("{productId}")]
+    public async Task<Result> DeleteProduct([FromRoute] int productId)
+    {
+        return await _productsServices.DeleteProduct(productId);
+    }
 }
