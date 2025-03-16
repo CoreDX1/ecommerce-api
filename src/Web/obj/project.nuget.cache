@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "eJ3VlXeRXW0=",
+  "dgSpecHash": "/MgDv3hlQhs=",
   "success": true,
   "projectFilePath": "/home/christian/Desktop/Projects/E-commerce/src/Web/Web.csproj",
   "expectedPackageFiles": [
@@ -29,10 +29,7 @@
     "/home/christian/.nuget/packages/swashbuckle.aspnetcore.swagger/6.6.2/swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "/home/christian/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.6.2/swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
     "/home/christian/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.6.2/swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
-    "/home/christian/.nuget/packages/system.diagnostics.diagnosticsource/9.0.3/system.diagnostics.diagnosticsource.9.0.3.nupkg.sha512",
-    "/home/christian/.nuget/packages/system.linq.dynamic.core/1.3.7/system.linq.dynamic.core.1.3.7.nupkg.sha512",
-    "/home/christian/.nuget/packages/tanvirarjel.efcore.genericrepository/6.0.4/tanvirarjel.efcore.genericrepository.6.0.4.nupkg.sha512",
-    "/home/christian/.nuget/packages/tanvirarjel.efcore.queryrepository/1.5.3/tanvirarjel.efcore.queryrepository.1.5.3.nupkg.sha512"
+    "/home/christian/.nuget/packages/system.diagnostics.diagnosticsource/9.0.3/system.diagnostics.diagnosticsource.9.0.3.nupkg.sha512"
   ],
   "logs": []
 }

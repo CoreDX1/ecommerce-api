@@ -3,7 +3,7 @@ using Application.DTOs.Response.Customer;
 using Ardalis.Result;
 using Domain.Entity;
 
-namespace Application.Interface;
+namespace Application.Interfaces;
 
 public interface ICustomerServices
 {

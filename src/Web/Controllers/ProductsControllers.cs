@@ -1,6 +1,6 @@
-using Application.Interface;
+using Application.DTOs.Response.Product;
+using Application.Interfaces;
 using Ardalis.Result;
-using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -18,21 +18,23 @@ public class ProductsControllers : ControllerBase
 
     [HttpGet]
     [Route("all")]
-    public async Task<Result<List<Product>>> GetAllProducts()
+    public async Task<Result<List<ProductResponseDTO>>> GetAllProducts()
     {
         return await _productsServices.GetAllProducts();
     }
 
     [HttpGet]
     [Route("{productId}")]
-    public async Task<Result<Product>> GetProductById([FromRoute] int productId)
+    public async Task<Result<ProductResponseDTO>> GetProductById([FromRoute] int productId)
     {
         return await _productsServices.GetProductById(productId);
     }
 
     [HttpGet]
     [Route("product/{name}")]
-    public async Task<Result<IEnumerable<Product>>> GetProductByName([FromRoute] string name)
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(
+        [FromRoute] string name
+    )
     {
         return await _productsServices.GetProductByName(name);
     }

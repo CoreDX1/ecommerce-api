@@ -1,8 +1,7 @@
 using Application.DTOs.Request.Customer;
 using Application.DTOs.Response.Customer;
-using Application.Interface;
+using Application.Interfaces;
 using Ardalis.Result;
-using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
