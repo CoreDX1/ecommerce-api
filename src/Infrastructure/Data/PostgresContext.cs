@@ -27,11 +27,6 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseNpgsql(
-            "Host=localhost; Database=postgres; Username=core; Password=index"
-        );
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         OnModelCreatingPartial(builder);
