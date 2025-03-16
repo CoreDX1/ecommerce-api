@@ -2,24 +2,24 @@ using Application.Interface;
 using Ardalis.Result;
 using Domain.Entity;
 using Domain.Interfaces;
-using TanvirArjel.EFCore.GenericRepository;
 
 namespace Application.Services;
 
 public class ProductsServices : IProductsServices
 {
-    readonly IRepository _repository;
+    // readonly IRepository _repository;
     readonly IUnitOfWork _unitOfWork;
 
-    public ProductsServices(IRepository repository, IUnitOfWork unitOfWork)
+    public ProductsServices(IUnitOfWork unitOfWork)
     {
-        _repository = repository;
         _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<List<Product>>> GetAllProducts()
     {
-        List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
+        List<Product> products = await _unitOfWork.Product.GetAllAsync();
+
+        // List<Product> products = await _repository.GetListAsync<Product>();
 
         if (products == null)
             return Result.NotFound("Products not found");
@@ -29,7 +29,7 @@ public class ProductsServices : IProductsServices
 
     public async Task<Result<Product>> GetProductById(int productId)
     {
-        Product product = await _repository.GetByIdAsync<Product>(productId);
+        Product product = await _unitOfWork.Product.GetByIdAsync(productId);
 
         if (product == null)
             return Result.NotFound("Product not found");
@@ -37,11 +37,9 @@ public class ProductsServices : IProductsServices
         return Result.Success(product, "Product retrieved successfully");
     }
 
-    public async Task<Result<List<Product>>> GetProductByName(string name)
+    public async Task<Result<IEnumerable<Product>>> GetProductByName(string name)
     {
-        var products = await _repository.GetListAsync<Product>(x =>
-            x.Name.ToLower().Contains(name.ToLower())
-        );
+        IEnumerable<Product> products = await _unitOfWork.Product.GetProductByName(name);
 
         if (products == null)
             return Result.NotFound("Product not found");

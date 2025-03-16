@@ -2,6 +2,9 @@ namespace Domain.Interfaces;
 
 public interface IUnitOfWork : IDisposable
 {
-    IProductRepository ProductRepository { get; }
-    ICustomerRepository CustomerRepository { get; }
+    IProductRepository Product { get; }
+    ICustomerRepository Customer { get; }
+
+    // IGenericRepository<TEntity> Repository<TEntity>()
+    //     where TEntity : class;
 }

@@ -32,7 +32,7 @@ public class ProductsControllers : ControllerBase
 
     [HttpGet]
     [Route("product/{name}")]
-    public async Task<Result<List<Product>>> GetProductByName([FromRoute] string name)
+    public async Task<Result<IEnumerable<Product>>> GetProductByName([FromRoute] string name)
     {
         return await _productsServices.GetProductByName(name);
     }

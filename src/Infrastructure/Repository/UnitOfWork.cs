@@ -5,21 +5,28 @@ namespace Infrastructure.Repository;
 
 public class UnitOfWork : IUnitOfWork
 {
-    public IProductRepository ProductRepository { get; }
-
-    public ICustomerRepository CustomerRepository { get; }
-
     private readonly PostgresContext _context;
 
+    public IProductRepository Product { get; }
+
+    public ICustomerRepository Customer { get; }
+
+    // public IGenericRepository<TEntity> Repository<TEntity>()
+    //     where TEntity : class
+    // {
+    //     return new GenericRepository<TEntity>(_context);
+    // }
+
+
     public UnitOfWork(
+        PostgresContext context,
         IProductRepository productRepository,
-        ICustomerRepository customerRepository,
-        PostgresContext context
+        ICustomerRepository customerRepository
     )
     {
-        ProductRepository = productRepository;
-        CustomerRepository = customerRepository;
         _context = context;
+        Product = productRepository;
+        Customer = customerRepository;
     }
 
     public void Dispose()
