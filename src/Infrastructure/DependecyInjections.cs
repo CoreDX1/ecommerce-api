@@ -1,4 +1,7 @@
+using Domain.Entity;
+using Domain.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +18,11 @@ public static class DependecyInjections
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddGenericRepository<PostgresContext>();
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+
         services.AddDbContext<PostgresContext>(
             options => options.UseNpgsql(connectionString),
             ServiceLifetime.Scoped

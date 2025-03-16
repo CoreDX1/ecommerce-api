@@ -29,7 +29,7 @@ var configuration = builder.Configuration;
 // Add application services.
 builder.Services.AddApplication();
 
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(configuration);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 

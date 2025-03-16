@@ -1,6 +1,7 @@
 using Application.Interface;
 using Ardalis.Result;
 using Domain.Entity;
+using Domain.Interfaces;
 using TanvirArjel.EFCore.GenericRepository;
 
 namespace Application.Services;
@@ -8,15 +9,17 @@ namespace Application.Services;
 public class ProductsServices : IProductsServices
 {
     readonly IRepository _repository;
+    readonly IUnitOfWork _unitOfWork;
 
-    public ProductsServices(IRepository repository)
+    public ProductsServices(IRepository repository, IUnitOfWork unitOfWork)
     {
         _repository = repository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<List<Product>>> GetAllProducts()
     {
-        List<Product> products = await _repository.GetListAsync<Product>();
+        List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
 
         if (products == null)
             return Result.NotFound("Products not found");
