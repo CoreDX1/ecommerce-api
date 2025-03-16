@@ -3,7 +3,7 @@ using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repository;
+namespace Infrastructure.Repositories;
 
 public class ProductRepository : GenericRepository<Product>, IProductRepository
 {
@@ -15,5 +15,10 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
         return await _context
             .Products.Where(p => p.Name.ToLower().Contains(name.ToLower()))
             .ToListAsync();
+    }
+
+    public Task<IEnumerable<Product>> GetProductsByFilter()
+    {
+        throw new NotImplementedException();
     }
 }

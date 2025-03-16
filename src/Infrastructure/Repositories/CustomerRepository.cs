@@ -2,7 +2,7 @@ using Domain.Entity;
 using Domain.Interfaces;
 using Infrastructure.Data;
 
-namespace Infrastructure.Repository;
+namespace Infrastructure.Repositories;
 
 public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
 {

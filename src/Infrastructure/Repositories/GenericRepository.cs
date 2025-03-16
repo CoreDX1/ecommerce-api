@@ -2,7 +2,7 @@ using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repository;
+namespace Infrastructure.Repositories;
 
 public class GenericRepository<TEntity> : IGenericRepository<TEntity>
     where TEntity : class

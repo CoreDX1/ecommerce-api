@@ -1,15 +1,14 @@
-using Domain.Entity;
 using Domain.Interfaces;
+using Domain.Interfaces.Persistence;
 using Infrastructure.Data;
-using Infrastructure.Repository;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TanvirArjel.EFCore.GenericRepository;
 
 namespace Infrastructure;
 
-public static class DependecyInjections
+public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(
         this IServiceCollection services,
@@ -17,7 +16,7 @@ public static class DependecyInjections
     )
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
-        services.AddGenericRepository<PostgresContext>();
+        // services.AddGenericRepository<PostgresContext>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IProductRepository, ProductRepository>();
