@@ -12,22 +12,13 @@ public class UnitOfWork : IUnitOfWork
 
     public ICustomerRepository Customer { get; }
 
-    IProductRepository IUnitOfWork.Product => throw new NotImplementedException();
+    public IGenericRepository<TEntity> Repository<TEntity>()
+        where TEntity : class
+    {
+        return new GenericRepository<TEntity>(_context);
+    }
 
-    ICustomerRepository IUnitOfWork.Customer => throw new NotImplementedException();
-
-    // public IGenericRepository<TEntity> Repository<TEntity>()
-    //     where TEntity : class
-    // {
-    //     return new GenericRepository<TEntity>(_context);
-    // }
-
-
-    public UnitOfWork(
-        PostgresContext context,
-        IProductRepository productRepository,
-        ICustomerRepository customerRepository
-    )
+    public UnitOfWork(PostgresContext context, IProductRepository productRepository, ICustomerRepository customerRepository)
     {
         _context = context;
         Product = productRepository;

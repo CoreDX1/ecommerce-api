@@ -2,6 +2,7 @@ using Application.Interfaces;
 using Ardalis.Result;
 using AutoMapper;
 using Domain.Interfaces;
+using Domain.Interfaces.Persistence;
 
 namespace Application.Services;
 
@@ -9,18 +10,18 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
     where TEntity : class
     where TDto : class
 {
-    private readonly IGenericRepository<TEntity> _repository;
-    private readonly IMapper _mapper;
+    protected readonly IUnitOfWork _unitOfWork;
+    protected readonly IMapper _mapper;
 
-    public ReadServiceAsync(IGenericRepository<TEntity> repository, IMapper mapper)
+    public ReadServiceAsync(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _repository = repository;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
     public async Task<Result<IEnumerable<TDto>>> GetAllAsync()
     {
-        List<TEntity> entities = await _repository.GetAllAsync();
+        List<TEntity> entities = await _unitOfWork.Repository<TEntity>().GetAllAsync();
 
         var entitiesResponse = _mapper.Map<IEnumerable<TDto>>(entities);
 
@@ -32,7 +33,7 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
 
     public async Task<Result<TDto>> GetByIdAsync(int id)
     {
-        TEntity entity = await _repository.GetByIdAsync(id);
+        TEntity entity = await _unitOfWork.Repository<TEntity>().GetByIdAsync(id);
 
         if (entity == null)
             return Result.NotFound("Entity not found");

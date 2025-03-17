@@ -1,6 +1,6 @@
 using Application.Interfaces;
 using AutoMapper;
-using Domain.Interfaces;
+using Domain.Interfaces.Persistence;
 
 namespace Application.Services;
 
@@ -8,21 +8,14 @@ public class GenericServiceAsync<TEntity, TDto> : ReadServiceAsync<TEntity, TDto
     where TEntity : class
     where TDto : class
 {
-    private readonly IGenericRepository<TEntity> _repository;
-    private readonly IMapper _mapper;
-
-    public GenericServiceAsync(IGenericRepository<TEntity> repository, IMapper mapper)
-        : base(repository, mapper)
-    {
-        _repository = repository;
-        _mapper = mapper;
-    }
+    public GenericServiceAsync(IUnitOfWork unitOfWork, IMapper mapper)
+        : base(unitOfWork, mapper) { }
 
     public Task AddAsync(TDto dto)
     {
         var entityDto = _mapper.Map<TEntity>(dto);
 
-        return _repository.AddAsync(entityDto);
+        return _unitOfWork.Repository<TEntity>().AddAsync(entityDto);
     }
 
     public Task DeleteAsync(int id)

@@ -5,10 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class ProductRepository : GenericRepository<Product>, IProductRepository
+public class ProductRepository : GenericRepository<Product>, IProductRepository, IDisposable
 {
     public ProductRepository(PostgresContext context)
         : base(context) { }
+
+    public void Dispose()
+    {
+        _context.Dispose();
+    }
 
     public async Task<IEnumerable<Product>> GetProductByName(string name)
     {

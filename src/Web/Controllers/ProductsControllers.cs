@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Application.DTOs.Response.Product;
 using Application.Interfaces;
 using Ardalis.Result;
