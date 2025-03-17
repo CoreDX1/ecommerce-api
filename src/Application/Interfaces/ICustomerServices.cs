@@ -1,7 +1,6 @@
 using Application.DTOs.Request.Customer;
 using Application.DTOs.Response.Customer;
 using Ardalis.Result;
-using Domain.Entity;
 
 namespace Application.Interfaces;
 

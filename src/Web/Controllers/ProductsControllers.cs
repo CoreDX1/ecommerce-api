@@ -9,9 +9,9 @@ namespace Web.Controllers;
 [Route("api/[controller]")]
 public class ProductsControllers : ControllerBase
 {
-    private readonly IProductMapping _services;
+    private readonly IProductServices _services;
 
-    public ProductsControllers(IProductMapping productsServices)
+    public ProductsControllers(IProductServices productsServices)
     {
         _services = productsServices;
     }
@@ -34,9 +34,15 @@ public class ProductsControllers : ControllerBase
         return await _services.GetProductByName(name);
     }
 
-    [HttpDelete("{productId}")] // DELETE: api/Products/5
-    public Task DeleteProduct([FromRoute] int productId)
+    [HttpGet("product/pagination/{page}/{recordsPerPage}")] // GET: api/Products/product/pagination/1/10
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByPagination([FromRoute] int page, [FromRoute] int recordsPerPage)
     {
-        throw new NotImplementedException();
+        return await _services.GetByPaginationAsync(page, recordsPerPage);
+    }
+
+    [HttpDelete("{productId}")] // DELETE: api/Products/5
+    public async Task DeleteProduct([FromRoute] int productId)
+    {
+        await _services.DeleteAsync(productId);
     }
 }
