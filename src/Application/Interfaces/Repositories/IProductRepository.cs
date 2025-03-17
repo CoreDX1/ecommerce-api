@@ -1,6 +1,6 @@
 using Domain.Entity;
 
-namespace Domain.Interfaces;
+namespace Application.Interfaces.Repositories;
 
 public interface IProductRepository : IGenericRepository<Product>, IDisposable
 {

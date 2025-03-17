@@ -1,10 +1,10 @@
 using Application.DTOs.Request.Customer;
 using Application.DTOs.Response.Customer;
 using Application.Interfaces;
+using Application.Interfaces.Persistence;
 using Ardalis.Result;
 using AutoMapper;
 using Domain.Entity;
-using Domain.Interfaces.Persistence;
 
 namespace Application.Services;
 
@@ -26,10 +26,7 @@ public class CustomerServices : ICustomerServices
 
         await _unitOfWork.Customer.AddAsync(customerDTo);
 
-        return Result.Success(
-            _mapper.Map<CustomerResponseDTO>(customerDTo),
-            "Customer created successfully"
-        );
+        return Result.Success(_mapper.Map<CustomerResponseDTO>(customerDTo), "Customer created successfully");
     }
 
     public Task<Result> DeleteCustomer(int customerId)

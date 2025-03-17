@@ -1,6 +1,6 @@
 using Application.Interfaces;
+using Application.Interfaces.Persistence;
 using AutoMapper;
-using Domain.Interfaces.Persistence;
 
 namespace Application.Services;
 

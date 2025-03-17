@@ -1,4 +1,6 @@
-namespace Domain.Interfaces.Persistence;
+using Application.Interfaces.Repositories;
+
+namespace Application.Interfaces.Persistence;
 
 public interface IUnitOfWork : IDisposable
 {

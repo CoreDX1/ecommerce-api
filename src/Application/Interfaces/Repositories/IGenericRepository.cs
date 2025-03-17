@@ -1,4 +1,4 @@
-namespace Domain.Interfaces;
+namespace Application.Interfaces.Repositories;
 
 public interface IGenericRepository<TEntity>
     where TEntity : class

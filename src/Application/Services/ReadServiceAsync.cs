@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
 using Application.Interfaces;
+using Application.Interfaces.Persistence;
 using Ardalis.Result;
 using AutoMapper;
-using Domain.Interfaces.Persistence;
 
 namespace Application.Services;
 
