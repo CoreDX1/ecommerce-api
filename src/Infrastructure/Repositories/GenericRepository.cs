@@ -7,11 +7,14 @@ namespace Infrastructure.Repositories;
 public class GenericRepository<TEntity> : IGenericRepository<TEntity>
     where TEntity : class
 {
-    internal PostgresContext _context;
+    protected readonly PostgresContext _context;
+
+    protected readonly DbSet<TEntity> _dbSet;
 
     public GenericRepository(PostgresContext context)
     {
         _context = context;
+        _dbSet = context.Set<TEntity>();
     }
 
     public async Task<TEntity> AddAsync(TEntity entity)

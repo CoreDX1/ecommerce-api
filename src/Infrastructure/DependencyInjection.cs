@@ -10,10 +10,7 @@ namespace Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration
-    )
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         // services.AddGenericRepository<PostgresContext>();
@@ -22,10 +19,9 @@ public static class DependencyInjection
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 
-        services.AddDbContext<PostgresContext>(
-            options => options.UseNpgsql(connectionString),
-            ServiceLifetime.Scoped
-        );
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Scoped);
         return services;
     }
 }

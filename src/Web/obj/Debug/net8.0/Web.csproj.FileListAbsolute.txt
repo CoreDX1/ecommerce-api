@@ -47,9 +47,6 @@
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Domain.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Domain.pdb
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
-/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/System.Linq.Dynamic.Core.dll
-/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/TanvirArjel.EFCore.GenericRepository.dll
-/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/TanvirArjel.EFCore.QueryRepository.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Ardalis.Specification.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Npgsql.dll

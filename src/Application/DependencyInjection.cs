@@ -14,6 +14,13 @@ public static class DependencyInjection
         services.AddScoped<IProductsServices, ProductsServices>();
         services.AddScoped<ICustomerServices, CustomerServices>();
 
+        // Generic Services
+        services.AddScoped(typeof(IReadServiceAsync<,>), typeof(ReadServiceAsync<,>));
+        services.AddScoped(typeof(IGenericServiceAsync<,>), typeof(GenericServiceAsync<,>));
+
+        // Asset Generic
+        services.AddScoped(typeof(IProductMapping), typeof(ProductMapping));
+
         // Add AutoMapper
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

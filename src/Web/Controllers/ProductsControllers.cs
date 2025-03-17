@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Application.DTOs.Response.Product;
 using Application.Interfaces;
 using Ardalis.Result;
@@ -9,36 +10,34 @@ namespace Web.Controllers;
 [Route("api/[controller]")]
 public class ProductsControllers : ControllerBase
 {
-    private readonly IProductsServices _productsServices;
+    private readonly IProductMapping _services;
 
-    public ProductsControllers(IProductsServices productsServices)
+    public ProductsControllers(IProductMapping productsServices)
     {
-        _productsServices = productsServices;
+        _services = productsServices;
     }
 
     [HttpGet("all")] // GET: api/Products
-    public async Task<Result<List<ProductResponseDTO>>> GetAllProducts()
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
     {
-        return await _productsServices.GetAllProducts();
+        return await _services.GetAllAsync();
     }
 
     [HttpGet("{productId}")] // GET: api/Products/5
     public async Task<Result<ProductResponseDTO>> GetProductById([FromRoute] int productId)
     {
-        return await _productsServices.GetProductById(productId);
+        return await _services.GetByIdAsync(productId);
     }
 
     [HttpGet("product/name/{name}")] // GET: api/Products/product/name/product-name
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(
-        [FromRoute] string name
-    )
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName([FromRoute] string name)
     {
-        return await _productsServices.GetProductByName(name);
+        return await _services.GetProductByName(name);
     }
 
     [HttpDelete("{productId}")] // DELETE: api/Products/5
-    public async Task<Result> DeleteProduct([FromRoute] int productId)
+    public Task DeleteProduct([FromRoute] int productId)
     {
-        return await _productsServices.DeleteProduct(productId);
+        throw new NotImplementedException();
     }
 }
