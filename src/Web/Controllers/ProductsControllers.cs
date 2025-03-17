@@ -16,22 +16,19 @@ public class ProductsControllers : ControllerBase
         _productsServices = productsServices;
     }
 
-    [HttpGet]
-    [Route("all")]
+    [HttpGet("all")] // GET: api/Products
     public async Task<Result<List<ProductResponseDTO>>> GetAllProducts()
     {
         return await _productsServices.GetAllProducts();
     }
 
-    [HttpGet]
-    [Route("{productId}")]
+    [HttpGet("{productId}")] // GET: api/Products/5
     public async Task<Result<ProductResponseDTO>> GetProductById([FromRoute] int productId)
     {
         return await _productsServices.GetProductById(productId);
     }
 
-    [HttpGet]
-    [Route("product/{name}")]
+    [HttpGet("product/name/{name}")] // GET: api/Products/product/name/product-name
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(
         [FromRoute] string name
     )
@@ -39,7 +36,7 @@ public class ProductsControllers : ControllerBase
         return await _productsServices.GetProductByName(name);
     }
 
-    [HttpDelete("{productId}")]
+    [HttpDelete("{productId}")] // DELETE: api/Products/5
     public async Task<Result> DeleteProduct([FromRoute] int productId)
     {
         return await _productsServices.DeleteProduct(productId);
