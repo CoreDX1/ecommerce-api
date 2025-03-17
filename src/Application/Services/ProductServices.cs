@@ -1,3 +1,4 @@
+using Application.DTOs.Request.Product;
 using Application.DTOs.Response.Product;
 using Application.Interfaces;
 using Application.Interfaces.Persistence;
@@ -27,6 +28,18 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetByPaginationAsync(int page, int recordsPerPage)
     {
         IEnumerable<Product> products = await _unitOfWork.Product.GetByPaginationAsync(page, recordsPerPage);
+
+        if (products == null)
+            return Result.NotFound("Product not found");
+
+        var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
+
+        return Result.Success(productResponse, "Product retrieved successfully");
+    }
+
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(FilterProductRequestDTO filter)
+    {
+        IEnumerable<Product> products = await _unitOfWork.Product.GetProductsByFilter(filter);
 
         if (products == null)
             return Result.NotFound("Product not found");

@@ -1,3 +1,5 @@
+using Domain.Entity;
+
 namespace Application.DTOs.Response.Product;
 
 public class ProductResponseDTO
@@ -11,4 +13,6 @@ public class ProductResponseDTO
     public decimal Price { get; set; }
 
     public int Quantity { get; set; }
+
+    public string CategoryName { get; set; } = null!;
 }

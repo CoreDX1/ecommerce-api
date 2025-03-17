@@ -1,3 +1,4 @@
+using Application.DTOs.Request.Product;
 using Application.DTOs.Response.Product;
 using Application.Interfaces;
 using Ardalis.Result;
@@ -44,5 +45,11 @@ public class ProductsControllers : ControllerBase
     public async Task DeleteProduct([FromRoute] int productId)
     {
         await _services.DeleteAsync(productId);
+    }
+
+    [HttpPost("product/filter")] // POST: api/Products/product/filter
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter([FromBody] FilterProductRequestDTO filter)
+    {
+        return await _services.GetProductsByFilter(filter);
     }
 }
