@@ -17,11 +17,10 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         _dbSet = context.Set<TEntity>();
     }
 
-    public async Task<TEntity> AddAsync(TEntity entity)
+    public async Task AddAsync(TEntity entity)
     {
         await _context.Set<TEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
-        return entity;
     }
 
     public void DeleteAsync(TEntity entity)

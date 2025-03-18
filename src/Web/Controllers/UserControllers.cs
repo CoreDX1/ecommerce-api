@@ -1,4 +1,7 @@
+using Application.DTOs.Request.User;
+using Application.DTOs.Response.User;
 using Application.Interfaces;
+using Ardalis.Result;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -14,10 +17,15 @@ public class UserControllers : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet]
-    [Route("name")]
-    public string GetUserName()
+    [HttpPost("register")]
+    public async Task<Result<UserResponseDTO>> RegisterUser([FromBody] CreateUserRequestDTO createUser)
     {
-        return _userService.GetUserName();
+        return await _userService.RegisterUser(createUser);
+    }
+
+    [HttpPost("login")]
+    public async Task<Result<UserResponseDTO>> LoginUser([FromBody] LoginUserRequestDTO loginUser)
+    {
+        return await _userService.LoginUser(loginUser);
     }
 }

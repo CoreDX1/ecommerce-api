@@ -12,17 +12,20 @@ public class UnitOfWork : IUnitOfWork
 
     public ICustomerRepository Customer { get; }
 
+    public IUserRepository User { get; }
+
     public IGenericRepository<TEntity> Repository<TEntity>()
         where TEntity : class
     {
         return new GenericRepository<TEntity>(_context);
     }
 
-    public UnitOfWork(PostgresContext context, IProductRepository productRepository, ICustomerRepository customerRepository)
+    public UnitOfWork(PostgresContext context, IProductRepository productRepository, ICustomerRepository customerRepository, IUserRepository userRepository)
     {
         _context = context;
         Product = productRepository;
         Customer = customerRepository;
+        User = userRepository;
     }
 
     public void Dispose()

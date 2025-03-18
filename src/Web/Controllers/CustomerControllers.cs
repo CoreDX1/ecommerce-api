@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Controllers;
 
 [ApiController]
+[Route("api/[controller]")]
 public class CustomerControllers : ControllerBase
 {
     private readonly ICustomerServices _customerServices;
@@ -23,17 +24,13 @@ public class CustomerControllers : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<Result<CustomerResponseDTO>> CreateCustomer(
-        [FromBody] CreateCustomerRequestDTO customer
-    )
+    public async Task<Result<CustomerResponseDTO>> CreateCustomer([FromBody] CreateCustomerRequestDTO customer)
     {
         return await _customerServices.CreateCustomer(customer);
     }
 
     [HttpPut("{customerId}")]
-    public async Task<Result<CustomerResponseDTO>> UpdateCustomer(
-        [FromBody] UpdateCustomerRequestDTO customer
-    )
+    public async Task<Result<CustomerResponseDTO>> UpdateCustomer([FromBody] UpdateCustomerRequestDTO customer)
     {
         return await _customerServices.UpdateCustomer(customer);
     }

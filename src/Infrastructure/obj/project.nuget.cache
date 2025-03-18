@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "T2c3nB6MH9Y=",
+  "dgSpecHash": "fNIZ2P+3HvE=",
   "success": true,
   "projectFilePath": "/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/Infrastructure.csproj",
   "expectedPackageFiles": [
     "/home/christian/.nuget/packages/ardalis.result/10.1.0/ardalis.result.10.1.0.nupkg.sha512",
     "/home/christian/.nuget/packages/ardalis.specification/9.0.1/ardalis.specification.9.0.1.nupkg.sha512",
     "/home/christian/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
+    "/home/christian/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/home/christian/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",
