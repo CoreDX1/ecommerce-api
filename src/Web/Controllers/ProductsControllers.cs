@@ -20,7 +20,7 @@ public class ProductsControllers : ControllerBase
     [HttpGet("all")] // GET: api/Products
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
     {
-        return await _services.GetAllAsync();
+        return await _services.GetAllProducts();
     }
 
     [HttpGet("{productId}")] // GET: api/Products/5

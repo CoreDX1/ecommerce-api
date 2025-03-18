@@ -48,4 +48,16 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
 
         return Result.Success(productResponse, "Product retrieved successfully");
     }
+
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
+    {
+        IEnumerable<Product> products = await _unitOfWork.Product.GetAllProducts();
+
+        if (products == null)
+            return Result.NotFound("Product not found");
+
+        var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
+
+        return Result.Success(productResponse, "Product retrieved successfully");
+    }
 }

@@ -8,9 +8,9 @@ public class ProductResponseDTO
 
     public string Description { get; set; } = null!;
 
-    public decimal Price { get; set; }
+    public int StockQuantity { get; set; }
 
-    public int Quantity { get; set; }
+    public decimal Price { get; set; }
 
     public string CategoryName { get; set; } = null!;
 }

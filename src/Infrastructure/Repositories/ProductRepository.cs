@@ -125,4 +125,21 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository,
 
         return await query.ToListAsync();
     }
+
+    public async Task<IEnumerable<Product>> GetAllProducts()
+    {
+        IQueryable<Product> query = _context
+            .Products.Include(p => p.Category)
+            .Select(p => new Product()
+            {
+                CategoryName = p.Category.Name,
+                ProductId = p.ProductId,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                StockQuantity = p.StockQuantity,
+            });
+
+        return await query.ToListAsync();
+    }
 }
