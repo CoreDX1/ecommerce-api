@@ -18,7 +18,7 @@ public partial class Product
 
     public DateTime? LastUpdated { get; set; }
 
-    public virtual Category? Category { get; set; }
+    public virtual Category Category { get; set; } = null!;
 
     public string? CategoryName { get; set; }
 

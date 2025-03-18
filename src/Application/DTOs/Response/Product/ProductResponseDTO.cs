@@ -1,5 +1,3 @@
-using Domain.Entity;
-
 namespace Application.DTOs.Response.Product;
 
 public class ProductResponseDTO

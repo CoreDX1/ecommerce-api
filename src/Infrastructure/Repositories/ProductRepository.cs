@@ -79,9 +79,9 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository,
         }
 
         // Filtrado por precio
-        if (filter.Price.HasValue)
+        if (filter.Price < 0)
         {
-            query = query.Where(p => p.Price == filter.Price.Value);
+            query = query.Where(p => p.Price == filter.Price);
         }
 
         // Filtrado por categoría

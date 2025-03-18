@@ -2,8 +2,8 @@ namespace Application.DTOs.Request.Product;
 
 public class FilterProductRequestDTO
 {
-    public string? Name { get; set; }
-    public decimal? Price { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public decimal Price { get; set; } = 0;
 
     public int Page { get; set; } = 1;
     public int RecordsPerPage { get; set; } = 10;
