@@ -57,6 +57,11 @@ public class Repository<TEntity> : IRepository<TEntity>
         return await _context.Set<TEntity>().FindAsync(expression, findOptions, cancellationToken);
     }
 
+    public async Task<TEntity?> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default)
+    {
+        return await _context.Set<TEntity>().AsNoTracking().SingleOrDefaultAsync(expression, cancellationToken);
+    }
+
     public async Task<IEnumerable<TEntity>> GetAllAsync(FindOptions? findOptions = null, CancellationToken cancellationToken = default)
     {
         return await _context.Set<TEntity>().ToListAsync(cancellationToken);

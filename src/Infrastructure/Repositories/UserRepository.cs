@@ -53,9 +53,9 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public async Task<User> LoginUser(LoginUserRequestDTO loginUser)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == loginUser.Email);
+        User? user = await SingleOrDefaultAsync(x => x.Email == loginUser.Email);
 
-        if (!Verify(loginUser.Password, user!.PasswordHash))
+        if (user == null || !Verify(loginUser.Password, user!.PasswordHash))
         {
             return null!;
         }

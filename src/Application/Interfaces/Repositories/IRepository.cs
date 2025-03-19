@@ -58,6 +58,7 @@ public interface IRepository<TEntity>
     Task DeleteManyAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
     Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
     Task<int> CountAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
+    Task<TEntity?> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
 
     // IQueryable<TEntity> GetAll<T, Tkey>()
     //     where T : Entity<Tkey>;
