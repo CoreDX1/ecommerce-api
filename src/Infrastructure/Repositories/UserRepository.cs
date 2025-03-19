@@ -1,6 +1,5 @@
 using Application.DTOs.Request.User;
 using Application.Interfaces.Repositories;
-using BCrypt.Net;
 using Domain.Entity;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
