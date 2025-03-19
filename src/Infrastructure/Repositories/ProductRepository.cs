@@ -6,15 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class ProductRepository : Repository<Product>, IProductRepository, IDisposable
+public class ProductRepository : Repository<Product>, IProductRepository
 {
     public ProductRepository(PostgresContext context)
         : base(context) { }
-
-    public void Dispose()
-    {
-        _context.Dispose();
-    }
 
     public async Task<IEnumerable<Product>> GetByPaginationAsync(int page, int recordsPerPage)
     {
@@ -58,19 +53,7 @@ public class ProductRepository : Repository<Product>, IProductRepository, IDispo
 
     public async Task<IEnumerable<Product>> GetProductsByFilter(FilterProductRequestDTO filter)
     {
-        // IQueryable<Product> query = _context.Products;
-
-        IQueryable<Product> query = _context
-            .Products.Include(p => p.Category)
-            .Select(p => new Product()
-            {
-                CategoryName = p.Category.Name,
-                ProductId = p.ProductId,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                StockQuantity = p.StockQuantity,
-            });
+        IEnumerable<Product> query = await GetAllAsync();
 
         // Filtrado por nombre
         if (!string.IsNullOrEmpty(filter.Name))
@@ -80,15 +63,7 @@ public class ProductRepository : Repository<Product>, IProductRepository, IDispo
 
         // Filtrado por precio
         if (filter.Price < 0)
-        {
             query = query.Where(p => p.Price == filter.Price);
-        }
-
-        // Filtrado por categoría
-        // if (!string.IsNullOrEmpty(filter.Category))
-        // {
-        //     query = query.Where(p => p.Category.Contains(filter.Category, System.StringComparison.OrdinalIgnoreCase)); // Búsqueda insensible a mayúsculas
-        // }
 
         // Ordenamiento
         if (!string.IsNullOrEmpty(filter.OrderBy))
@@ -123,7 +98,7 @@ public class ProductRepository : Repository<Product>, IProductRepository, IDispo
             query = query.Skip((filter.Page - 1) * filter.RecordsPerPage).Take(filter.RecordsPerPage);
         }
 
-        return await query.ToListAsync();
+        return query;
     }
 
     public async Task<IEnumerable<Product>> GetAllProducts()

@@ -7,6 +7,6 @@ namespace Application.Interfaces;
 
 public interface IUserService : IGenericServiceAsync<User, UserResponseDTO>
 {
-    public Task<Result<UserResponseDTO>> RegisterUser(CreateUserRequestDTO createUser);
-    public Task<Result<UserResponseDTO>> LoginUser(LoginUserRequestDTO loginUser);
+    Task<Result<UserResponseDTO>> RegisterUser(CreateUserRequestDTO createUser);
+    Task<Result<UserResponseDTO>> LoginUser(LoginUserRequestDTO loginUser);
 }

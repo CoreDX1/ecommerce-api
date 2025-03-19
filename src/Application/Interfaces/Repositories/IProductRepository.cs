@@ -3,12 +3,12 @@ using Domain.Entity;
 
 namespace Application.Interfaces.Repositories;
 
-public interface IProductRepository : IRepository<Product>, IDisposable
+public interface IProductRepository : IRepository<Product>
 {
-    public Task<IEnumerable<Product>> GetProductByName(string name);
-    public Task<IEnumerable<Product>> GetProductsByFilter(FilterProductRequestDTO filter);
-    public Task<IEnumerable<Product>> GetAllProducts();
+    Task<IEnumerable<Product>> GetAllProducts();
+    Task<IEnumerable<Product>> GetProductByName(string name);
+    Task<IEnumerable<Product>> GetProductsByFilter(FilterProductRequestDTO filter);
 
-    public Task<IEnumerable<Product>> GetByPaginationAsync(int page, int recordsPerPage);
-    public Task<IEnumerable<Product>> GetBySortingAsync(string sortColumn, bool isDescending);
+    Task<IEnumerable<Product>> GetByPaginationAsync(int page, int recordsPerPage);
+    Task<IEnumerable<Product>> GetBySortingAsync(string sortColumn, bool isDescending);
 }

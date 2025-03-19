@@ -7,9 +7,9 @@ namespace Application.Interfaces;
 
 public interface IProductServices : IGenericServiceAsync<Product, ProductResponseDTO>
 {
-    public Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(string name);
-    public Task<Result<IEnumerable<ProductResponseDTO>>> GetByPaginationAsync(int page, int recordsPerPage);
+    Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(string name);
+    Task<Result<IEnumerable<ProductResponseDTO>>> GetByPaginationAsync(int page, int recordsPerPage);
 
-    public Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(FilterProductRequestDTO filter);
-    public Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts();
+    Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(FilterProductRequestDTO filter);
+    Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts();
 }
