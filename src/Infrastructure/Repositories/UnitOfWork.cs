@@ -14,10 +14,10 @@ public class UnitOfWork : IUnitOfWork
 
     public IUserRepository User { get; }
 
-    public IGenericRepository<TEntity> Repository<TEntity>()
+    public IRepository<TEntity> Repository<TEntity>()
         where TEntity : class
     {
-        return new GenericRepository<TEntity>(_context);
+        return new Repository<TEntity>(_context);
     }
 
     public UnitOfWork(PostgresContext context, IProductRepository productRepository, ICustomerRepository customerRepository, IUserRepository userRepository)

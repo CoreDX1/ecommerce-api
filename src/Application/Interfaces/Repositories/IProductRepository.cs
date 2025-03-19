@@ -3,7 +3,7 @@ using Domain.Entity;
 
 namespace Application.Interfaces.Repositories;
 
-public interface IProductRepository : IGenericRepository<Product>, IDisposable
+public interface IProductRepository : IRepository<Product>, IDisposable
 {
     public Task<IEnumerable<Product>> GetProductByName(string name);
     public Task<IEnumerable<Product>> GetProductsByFilter(FilterProductRequestDTO filter);

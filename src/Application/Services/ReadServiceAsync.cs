@@ -21,7 +21,7 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
 
     public async Task<Result<IEnumerable<TDto>>> GetAllAsync()
     {
-        List<TEntity> entities = await _unitOfWork.Repository<TEntity>().GetAllAsync();
+        IEnumerable<TEntity> entities = await _unitOfWork.Repository<TEntity>().GetAllAsync();
 
         var entitiesResponse = _mapper.Map<IEnumerable<TDto>>(entities);
 
@@ -33,7 +33,7 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
 
     public async Task<Result<TDto>> GetByIdAsync(int id)
     {
-        TEntity entity = await _unitOfWork.Repository<TEntity>().GetByIdAsync(id);
+        TEntity? entity = await _unitOfWork.Repository<TEntity>().GetByIdAsync(id);
 
         if (entity == null)
             return Result.NotFound("Entity not found");

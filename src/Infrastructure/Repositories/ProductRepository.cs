@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class ProductRepository : GenericRepository<Product>, IProductRepository, IDisposable
+public class ProductRepository : Repository<Product>, IProductRepository, IDisposable
 {
     public ProductRepository(PostgresContext context)
         : base(context) { }

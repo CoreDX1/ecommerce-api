@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class UserRepository : GenericRepository<User>, IUserRepository
+public class UserRepository : Repository<User>, IUserRepository
 {
-    private readonly IGenericRepository<Customer> _customerRepository;
+    private readonly IRepository<Customer> _customerRepository;
 
-    public UserRepository(PostgresContext context, IGenericRepository<Customer> customerRepository)
+    public UserRepository(PostgresContext context, IRepository<Customer> customerRepository)
         : base(context)
     {
         _customerRepository = customerRepository;

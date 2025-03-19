@@ -20,7 +20,7 @@ public static class DependencyInjection
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 
-        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Scoped);
         return services;

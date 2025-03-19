@@ -8,6 +8,6 @@ public interface IUnitOfWork : IDisposable
     ICustomerRepository Customer { get; }
     IUserRepository User { get; }
 
-    IGenericRepository<TEntity> Repository<TEntity>()
+    IRepository<TEntity> Repository<TEntity>()
         where TEntity : class;
 }
