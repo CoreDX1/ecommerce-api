@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CdoRjRPvsT4=",
+  "dgSpecHash": "2vIplaKc3Dw=",
   "success": true,
   "projectFilePath": "/home/christian/Desktop/Projects/E-commerce/src/Web/Web.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/home/christian/.nuget/packages/ardalis.specification/9.0.1/ardalis.specification.9.0.1.nupkg.sha512",
     "/home/christian/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/home/christian/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.0/microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.aspnetcore.openapi/8.0.13/microsoft.aspnetcore.openapi.8.0.13.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.entityframeworkcore/9.0.3/microsoft.entityframeworkcore.9.0.3.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.3/microsoft.entityframeworkcore.abstractions.9.0.3.nupkg.sha512",
@@ -23,14 +24,22 @@
     "/home/christian/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.3/microsoft.extensions.logging.abstractions.9.0.3.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.extensions.options/9.0.3/microsoft.extensions.options.9.0.3.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.extensions.primitives/9.0.3/microsoft.extensions.primitives.9.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/microsoft.identitymodel.abstractions/7.0.3/microsoft.identitymodel.abstractions.7.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/microsoft.identitymodel.jsonwebtokens/7.0.3/microsoft.identitymodel.jsonwebtokens.7.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/microsoft.identitymodel.logging/7.0.3/microsoft.identitymodel.logging.7.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/microsoft.identitymodel.protocols/7.0.3/microsoft.identitymodel.protocols.7.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/7.0.3/microsoft.identitymodel.protocols.openidconnect.7.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/microsoft.identitymodel.tokens/7.0.3/microsoft.identitymodel.tokens.7.0.3.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.openapi/1.6.14/microsoft.openapi.1.6.14.nupkg.sha512",
+    "/home/christian/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/home/christian/.nuget/packages/npgsql/9.0.3/npgsql.9.0.3.nupkg.sha512",
     "/home/christian/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.4/npgsql.entityframeworkcore.postgresql.9.0.4.nupkg.sha512",
     "/home/christian/.nuget/packages/swashbuckle.aspnetcore/6.6.2/swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "/home/christian/.nuget/packages/swashbuckle.aspnetcore.swagger/6.6.2/swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "/home/christian/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.6.2/swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
     "/home/christian/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.6.2/swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
-    "/home/christian/.nuget/packages/system.diagnostics.diagnosticsource/9.0.3/system.diagnostics.diagnosticsource.9.0.3.nupkg.sha512"
+    "/home/christian/.nuget/packages/system.diagnostics.diagnosticsource/9.0.3/system.diagnostics.diagnosticsource.9.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/system.identitymodel.tokens.jwt/7.0.3/system.identitymodel.tokens.jwt.7.0.3.nupkg.sha512"
   ],
   "logs": []
 }

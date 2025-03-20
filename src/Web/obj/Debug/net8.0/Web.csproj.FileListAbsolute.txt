@@ -56,3 +56,12 @@
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Ardalis.Result.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/AutoMapper.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Newtonsoft.Json.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
