@@ -94,3 +94,16 @@ CREATE TABLE users (
     password_reset_token VARCHAR(255), -- Token para restablecer la contraseña
     password_reset_expiry TIMESTAMP
 );
+
+CREATE TABLE roles(
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL,
+)
+
+CREATE TABLE users_roles(
+    user_id INTEGER REFERENCES users(user_id),
+    role_id INTEGER REFERENCES roles(role_id),
+    PRIMARY KEY (user_id, role_id)
+)
+
+INSERT INTO roles (role_name) VALUES ('usuario'), ('admin'), ('editor');

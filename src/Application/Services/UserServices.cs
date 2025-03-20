@@ -15,7 +15,7 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 
     public async Task<Result<UserResponseDTO>> RegisterUser(CreateUserRequestDTO createUser)
     {
-        var user = await _unitOfWork.User.RegisterUser(createUser);
+        User user = await _unitOfWork.User.RegisterUser(createUser);
 
         if (user == null)
             return Result.NotFound("User not found");
@@ -27,7 +27,7 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 
     public async Task<Result<UserResponseDTO>> LoginUser(LoginUserRequestDTO loginUser)
     {
-        var user = await _unitOfWork.User.LoginUser(loginUser);
+        User user = await _unitOfWork.User.LoginUser(loginUser);
 
         if (user == null)
             return Result.NotFound("User not found");
