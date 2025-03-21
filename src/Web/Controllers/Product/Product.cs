@@ -4,15 +4,15 @@ using Application.Interfaces;
 using Ardalis.Result;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers;
+namespace Web.Controllers.Product;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductsControllers : ControllerBase
+public class Product : ControllerBase
 {
     private readonly IProductServices _services;
 
-    public ProductsControllers(IProductServices productsServices)
+    public Product(IProductServices productsServices)
     {
         _services = productsServices;
     }
@@ -30,13 +30,18 @@ public class ProductsControllers : ControllerBase
     }
 
     [HttpGet("product/name/{name}")] // GET: api/Products/product/name/product-name
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName([FromRoute] string name)
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(
+        [FromRoute] string name
+    )
     {
         return await _services.GetProductByName(name);
     }
 
     [HttpGet("product/pagination/{page}/{recordsPerPage}")] // GET: api/Products/product/pagination/1/10
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByPagination([FromRoute] int page, [FromRoute] int recordsPerPage)
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByPagination(
+        [FromRoute] int page,
+        [FromRoute] int recordsPerPage
+    )
     {
         return await _services.GetByPaginationAsync(page, recordsPerPage);
     }
@@ -48,7 +53,9 @@ public class ProductsControllers : ControllerBase
     }
 
     [HttpPost("product/filter")] // POST: api/Products/product/filter
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter([FromBody] FilterProductRequestDTO filter)
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(
+        [FromBody] FilterProductRequestDTO filter
+    )
     {
         return await _services.GetProductsByFilter(filter);
     }

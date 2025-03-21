@@ -13,11 +13,11 @@ public class ProductRepository : Repository<Product>, IProductRepository
 
     public async Task<IEnumerable<Product>> GetByPaginationAsync(int page, int recordsPerPage)
     {
-        IQueryable<Product> query = _context.Products;
+        var query = await GetAllProducts();
 
         query = query.Skip(page * recordsPerPage).Take(recordsPerPage);
 
-        return await query.ToListAsync();
+        return query;
     }
 
     public async Task<IEnumerable<Product>> GetBySortingAsync(string sortColumn, bool isDescending)
@@ -48,12 +48,13 @@ public class ProductRepository : Repository<Product>, IProductRepository
 
     public async Task<IEnumerable<Product>> GetProductByName(string name)
     {
-        return await _context.Products.Where(p => p.Name.ToLower().Contains(name.ToLower())).ToListAsync();
+        var query = await GetAllProducts();
+        return query.Where(p => p.Name.ToLower().Contains(name));
     }
 
     public async Task<IEnumerable<Product>> GetProductsByFilter(FilterProductRequestDTO filter)
     {
-        IEnumerable<Product> query = await GetAllAsync();
+        IEnumerable<Product> query = await GetAllProducts();
 
         // Filtrado por nombre
         if (!string.IsNullOrEmpty(filter.Name))
@@ -71,13 +72,19 @@ public class ProductRepository : Repository<Product>, IProductRepository
             switch (filter.OrderBy.ToLower())
             {
                 case "name":
-                    query = filter.IsDescending ? query.OrderByDescending(p => p.Name) : query.OrderBy(p => p.Name);
+                    query = filter.IsDescending
+                        ? query.OrderByDescending(p => p.Name)
+                        : query.OrderBy(p => p.Name);
                     break;
                 case "price":
-                    query = filter.IsDescending ? query.OrderByDescending(p => p.Price) : query.OrderBy(p => p.Price);
+                    query = filter.IsDescending
+                        ? query.OrderByDescending(p => p.Price)
+                        : query.OrderBy(p => p.Price);
                     break;
                 case "category":
-                    query = filter.IsDescending ? query.OrderByDescending(p => p.Category) : query.OrderBy(p => p.Category);
+                    query = filter.IsDescending
+                        ? query.OrderByDescending(p => p.Category)
+                        : query.OrderBy(p => p.Category);
                     break;
                 // Puedes agregar más criterios de ordenamiento aquí
                 default:
@@ -95,7 +102,9 @@ public class ProductRepository : Repository<Product>, IProductRepository
         // Paginación
         if (filter.Page > 0 && filter.RecordsPerPage > 0)
         {
-            query = query.Skip((filter.Page - 1) * filter.RecordsPerPage).Take(filter.RecordsPerPage);
+            query = query
+                .Skip((filter.Page - 1) * filter.RecordsPerPage)
+                .Take(filter.RecordsPerPage);
         }
 
         return query;

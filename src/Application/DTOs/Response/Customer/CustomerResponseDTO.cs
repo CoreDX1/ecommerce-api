@@ -2,7 +2,7 @@ namespace Application.DTOs.Response.Customer;
 
 public class CustomerResponseDTO
 {
-    public int CustomerId { get; set; }
+    public int Id { get; set; }
 
     public string FirstName { get; set; } = null!;
 

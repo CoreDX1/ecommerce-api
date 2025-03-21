@@ -1,7 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Application.DTOs.Request.User;
 using Application.DTOs.Response.User;
 using Application.Interfaces;
@@ -61,8 +60,8 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, loginUser.Username),
-            new Claim(JwtRegisteredClaimNames.Jti, loginUser.UserId.ToString()),
+            new(JwtRegisteredClaimNames.Sub, loginUser.Username),
+            new(JwtRegisteredClaimNames.Jti, loginUser.UserId.ToString()),
             // Cuando se quiere validar el tiempo de caducidad del token
             // new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()),
             // Cuando se quiere validar el tiempo de caducidad del token

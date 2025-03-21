@@ -4,21 +4,23 @@ using Application.Interfaces;
 using Ardalis.Result;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers;
+namespace Web.Controllers.User;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserControllers : ControllerBase
+public class User : ControllerBase
 {
     private readonly IUserService _userService;
 
-    public UserControllers(IUserService userService)
+    public User(IUserService userService)
     {
         _userService = userService;
     }
 
     [HttpPost("register")]
-    public async Task<Result<UserResponseDTO>> RegisterUser([FromBody] CreateUserRequestDTO createUser)
+    public async Task<Result<UserResponseDTO>> RegisterUser(
+        [FromBody] CreateUserRequestDTO createUser
+    )
     {
         return await _userService.RegisterUser(createUser);
     }

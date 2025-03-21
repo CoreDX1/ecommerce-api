@@ -2,7 +2,7 @@ namespace Application.DTOs.Response.Product;
 
 public class ProductResponseDTO
 {
-    public int ProductId { get; set; }
+    public int Id { get; set; }
 
     public string Name { get; set; } = null!;
 

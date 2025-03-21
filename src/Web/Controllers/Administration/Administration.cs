@@ -4,16 +4,16 @@ using Ardalis.Result;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers;
+namespace Web.Controllers.Administration;
 
 [Authorize(Roles = "admin")]
 [Route("api/[controller]")]
 [ApiController]
-public class AdministrationControllers : ControllerBase
+public class Administration : ControllerBase
 {
     private readonly IProductServices _productServices;
 
-    public AdministrationControllers(IProductServices productServices)
+    public Administration(IProductServices productServices)
     {
         _productServices = productServices;
     }

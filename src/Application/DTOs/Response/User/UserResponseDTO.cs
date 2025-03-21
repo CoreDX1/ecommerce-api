@@ -2,7 +2,7 @@ namespace Application.DTOs.Response.User;
 
 public class UserResponseDTO
 {
-    public int UserId { get; set; }
+    public int Id { get; set; }
 
     public string Username { get; set; } = null!;
 

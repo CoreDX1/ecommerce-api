@@ -15,11 +15,14 @@ public class Mapping : Profile
         CreateMap<CreateCustomerRequestDTO, Customer>();
         CreateMap<Customer, CustomerResponseDTO>();
         CreateMap<UpdateCustomerRequestDTO, Customer>();
-        CreateMap<Customer, CustomerResponseDTO>();
+        CreateMap<Customer, CustomerResponseDTO>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CustomerId));
 
-        CreateMap<Product, ProductResponseDTO>();
+        CreateMap<Product, ProductResponseDTO>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ProductId));
 
         CreateMap<CreateUserRequestDTO, User>();
-        CreateMap<User, UserResponseDTO>();
+        CreateMap<User, UserResponseDTO>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.UserId));
     }
 }
