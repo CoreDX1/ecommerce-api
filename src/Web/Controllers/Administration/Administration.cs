@@ -18,7 +18,7 @@ public class Administration : ControllerBase
         _productServices = productServices;
     }
 
-    [HttpGet]
+    [HttpGet] // GET: api/Administration
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
     {
         return await _productServices.GetAllProducts();

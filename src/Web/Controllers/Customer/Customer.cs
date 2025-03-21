@@ -17,13 +17,13 @@ public class Customer : ControllerBase
         _customerServices = customerServices;
     }
 
-    [HttpGet("all")]
+    [HttpGet("all")] // GET: api/Customers
     public async Task<Result<List<CustomerResponseDTO>>> GetAllCustomers()
     {
         return await _customerServices.GetAllCustomers();
     }
 
-    [HttpPost("create")]
+    [HttpPost("create")] // POST: api/Customers
     public async Task<Result<CustomerResponseDTO>> CreateCustomer(
         [FromBody] CreateCustomerRequestDTO customer
     )
@@ -31,7 +31,7 @@ public class Customer : ControllerBase
         return await _customerServices.CreateCustomer(customer);
     }
 
-    [HttpPut("{customerId}")]
+    [HttpPut("{customerId}")] // PUT: api/Customers/5
     public async Task<Result<CustomerResponseDTO>> UpdateCustomer(
         [FromBody] UpdateCustomerRequestDTO customer
     )
@@ -39,7 +39,7 @@ public class Customer : ControllerBase
         return await _customerServices.UpdateCustomer(customer);
     }
 
-    [HttpDelete("{customerId}")]
+    [HttpDelete("{customerId}")] // DELETE: api/Customers/5
     public async Task<Result> DeleteCustomer([FromRoute] int customerId)
     {
         return await _customerServices.DeleteCustomer(customerId);

@@ -1,7 +1,9 @@
 using System.Text;
 using Application;
+using Application.Configuration;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -13,24 +15,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var configuration = builder.Configuration;
-
-builder
-    .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"], // Check this
-            ValidAudience = builder.Configuration["Jwt:Audience"], // Check this
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!)
-            ), // Check this and the "!" operator
-        };
-    });
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -80,11 +64,29 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 // Add application services.
-builder.Services.AddApplication();
+builder.Services.AddApplication(configuration);
 
 builder.Services.AddInfrastructure(configuration);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+builder
+    .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"], // Check this
+            ValidAudience = builder.Configuration["Jwt:Audience"], // Check this
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!)
+            ), // Check this and the "!" operator
+        };
+    });
 
 var app = builder.Build();
 

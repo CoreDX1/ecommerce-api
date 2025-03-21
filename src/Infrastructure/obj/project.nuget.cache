@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4sjI2MAYeKs=",
+  "dgSpecHash": "ybgmxktwodA=",
   "success": true,
   "projectFilePath": "/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "/home/christian/.nuget/packages/ardalis.specification/9.0.1/ardalis.specification.9.0.1.nupkg.sha512",
     "/home/christian/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/home/christian/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
+    "/home/christian/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
+    "/home/christian/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "/home/christian/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.11.0/fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
     "/home/christian/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.0/microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "/home/christian/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

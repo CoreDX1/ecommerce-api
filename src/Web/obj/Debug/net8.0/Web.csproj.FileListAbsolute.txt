@@ -65,3 +65,6 @@
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Newtonsoft.Json.dll
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/FluentValidation.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/FluentValidation.AspNetCore.dll
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/FluentValidation.DependencyInjectionExtensions.dll
