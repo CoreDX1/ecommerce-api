@@ -3,6 +3,27 @@
 GET {{Web_HostAddress}}/api/product/all
 Accept: application/json
 
+
+###
+POST {{Web_HostAddress}}/api/product/filter
+Content-Type: application/json
+
+{
+  "name": "samsung",
+  "isDescending": false,
+  "orderBy": "price"
+}
+
+# {
+#   "name": "string",
+#   "price": 0,
+#   "page": 0,
+#   "recordsPerPage": 0,
+#   "isDescending": true,
+#   "orderBy": "string",
+#   "categoryId": 0
+# }
+
 ###
 POST {{Web_HostAddress}}/api/user/login
 Content-Type: application/json

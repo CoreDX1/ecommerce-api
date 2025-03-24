@@ -72,19 +72,13 @@ public class ProductRepository : Repository<Product>, IProductRepository
             switch (filter.OrderBy.ToLower())
             {
                 case "name":
-                    query = filter.IsDescending
-                        ? query.OrderByDescending(p => p.Name)
-                        : query.OrderBy(p => p.Name);
+                    query = filter.IsDescending ? query.OrderByDescending(p => p.Name) : query.OrderBy(p => p.Name);
                     break;
                 case "price":
-                    query = filter.IsDescending
-                        ? query.OrderByDescending(p => p.Price)
-                        : query.OrderBy(p => p.Price);
+                    query = filter.IsDescending ? query.OrderByDescending(p => p.Price) : query.OrderBy(p => p.Price);
                     break;
                 case "category":
-                    query = filter.IsDescending
-                        ? query.OrderByDescending(p => p.Category)
-                        : query.OrderBy(p => p.Category);
+                    query = filter.IsDescending ? query.OrderByDescending(p => p.Category) : query.OrderBy(p => p.Category);
                     break;
                 // Puedes agregar más criterios de ordenamiento aquí
                 default:
@@ -102,9 +96,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
         // Paginación
         if (filter.Page > 0 && filter.RecordsPerPage > 0)
         {
-            query = query
-                .Skip((filter.Page - 1) * filter.RecordsPerPage)
-                .Take(filter.RecordsPerPage);
+            query = query.Skip((filter.Page - 1) * filter.RecordsPerPage).Take(filter.RecordsPerPage);
         }
 
         return query;

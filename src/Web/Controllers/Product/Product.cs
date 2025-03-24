@@ -29,19 +29,14 @@ public class Product : ControllerBase
         return await _services.GetByIdAsync(productId);
     }
 
-    [HttpGet("product/name/{name}")] // GET: api/Products/product/name/product-name
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(
-        [FromRoute] string name
-    )
+    [HttpGet("name/{name}")] // GET: api/Products/product/name/product-name
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName([FromRoute] string name)
     {
         return await _services.GetProductByName(name);
     }
 
-    [HttpGet("product/pagination/{page}/{recordsPerPage}")] // GET: api/Products/product/pagination/1/10
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByPagination(
-        [FromRoute] int page,
-        [FromRoute] int recordsPerPage
-    )
+    [HttpGet("pagination/{page}/{recordsPerPage}")] // GET: api/Products/product/pagination/1/10
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByPagination([FromRoute] int page, [FromRoute] int recordsPerPage)
     {
         return await _services.GetByPaginationAsync(page, recordsPerPage);
     }
@@ -52,10 +47,8 @@ public class Product : ControllerBase
         await _services.DeleteAsync(productId);
     }
 
-    [HttpPost("product/filter")] // POST: api/Products/product/filter
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(
-        [FromBody] FilterProductRequestDTO filter
-    )
+    [HttpPost("filter")] // POST: api/Products/product/filter
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter([FromBody] FilterProductRequestDTO filter)
     {
         return await _services.GetProductsByFilter(filter);
     }
