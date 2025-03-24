@@ -11,7 +11,6 @@ using AutoMapper;
 using Domain.Common.Constants;
 using Domain.Entity;
 using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -21,17 +20,20 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 {
     private readonly JwtConfig _jwtConfig;
     private readonly IValidator<LoginUserRequestDTO> _validator;
+    private readonly IValidatorServices _validatorServices;
 
     public UserServices(
         IUnitOfWork unitOfWork,
         IMapper mapper,
         IValidator<LoginUserRequestDTO> validator,
-        IOptions<JwtConfig> jwtConfig
+        IOptions<JwtConfig> jwtConfig,
+        IValidatorServices validatorServices
     )
         : base(unitOfWork, mapper)
     {
         _validator = validator;
         _jwtConfig = jwtConfig.Value;
+        _validatorServices = validatorServices;
     }
 
     public async Task<Result<UserResponseDTO>> RegisterAsync(CreateUserRequestDTO createUser)
@@ -46,31 +48,12 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         return Result.Success(userResponse, ReplyMessage.Success.Save);
     }
 
-    private static List<ValidationError> GetValidationError(ValidationResult validationResult)
-    {
-        List<ValidationError> validationError = [];
-
-        foreach (var error in validationResult.Errors)
-        {
-            validationError.Add(
-                new ValidationError()
-                {
-                    ErrorMessage = error.ErrorMessage,
-                    Identifier = error.PropertyName,
-                    ErrorCode = error.ErrorCode,
-                }
-            );
-        }
-
-        return validationError;
-    }
-
     public async Task<Result<UserResponseDTO>> LoginAsync(LoginUserRequestDTO loginUser)
     {
         var validationResult = await _validator.ValidateAsync(loginUser);
 
         if (!validationResult.IsValid)
-            return Result.Invalid(GetValidationError(validationResult));
+            return Result.Invalid(_validatorServices.GetValidationError(validationResult));
 
         User authenticatedUser = await _unitOfWork.UserRepository.AuthenticateAsync(loginUser);
 

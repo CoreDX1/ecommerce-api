@@ -1,18 +1,31 @@
+using Application.Common.Interfaces;
 using Application.Common.Interfaces.Persistence;
 using Application.DTOs.Request.Product;
 using Application.DTOs.Response.Product;
-using Application.Interfaces;
 using Ardalis.Result;
 using AutoMapper;
 using Domain.Common.Constants;
 using Domain.Entity;
+using FluentValidation;
 
 namespace Application.Services;
 
 public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>, IProductServices
 {
-    public ProductServices(IUnitOfWork unitOfWork, IMapper mapper)
-        : base(unitOfWork, mapper) { }
+    private readonly IValidator<CreateProductRequestDTO> _createProductValidator;
+    private readonly IValidatorServices _validatorServices;
+
+    public ProductServices(
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
+        IValidator<CreateProductRequestDTO> createProductValidator,
+        IValidatorServices validatorServices
+    )
+        : base(unitOfWork, mapper)
+    {
+        _createProductValidator = createProductValidator;
+        _validatorServices = validatorServices;
+    }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(string name)
     {
@@ -60,5 +73,43 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
         return Result.Success(productResponse, ReplyMessage.Success.Query);
+    }
+
+    public async Task<Result<ProductResponseDTO>> CreateProduct(CreateProductRequestDTO createProduct)
+    {
+        var validationResult = await _createProductValidator.ValidateAsync(createProduct);
+
+        if (!validationResult.IsValid)
+            return Result.Invalid(_validatorServices.GetValidationError(validationResult));
+
+        var productMapper = _mapper.Map<Product>(createProduct);
+
+        await AddAsync(productMapper);
+
+        var productCreated = _unitOfWork.ProductRepository.GetByIdAsync(productMapper.ProductId);
+
+        var productResponse = _mapper.Map<ProductResponseDTO>(productCreated);
+
+        return Result.Success(productResponse, ReplyMessage.Success.Save);
+    }
+
+    public Task<Result<ProductResponseDTO>> UpdateProduct(UpdateProductRequestDTO updateProduct)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<ProductResponseDTO>> DeleteProduct(int productId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<ProductResponseDTO>> GetProductById(int productId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<ProductResponseDTO>> GetProductByCategoryId(int categoryId)
+    {
+        throw new NotImplementedException();
     }
 }

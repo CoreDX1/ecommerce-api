@@ -1,12 +1,16 @@
+using System.Linq.Expressions;
+using Application.Common.Interfaces.Repositories;
 using Application.DTOs.Request.User;
+using Application.DTOs.Response.User;
 using Application.Interfaces.Repositories;
+using Ardalis.Result;
 using Domain.Entity;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class UserRepository : Repository<User>, IUserRepository
+public class UserRepository : Repository<User>, IUserServices
 {
     private readonly IRepository<Customer> _customerRepository;
 
@@ -29,9 +33,7 @@ public class UserRepository : Repository<User>, IUserRepository
 
         await _customerRepository.AddAsync(customer);
 
-        Customer? customerCreated = await _context.Customers.FirstOrDefaultAsync(x =>
-            x.Email == createUser.Email
-        );
+        Customer? customerCreated = await _context.Customers.FirstOrDefaultAsync(x => x.Email == createUser.Email);
 
         User user = new()
         {
@@ -44,17 +46,14 @@ public class UserRepository : Repository<User>, IUserRepository
 
         await AddAsync(user);
 
-        User? userCreated = await _context
-            .Users.AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Email == createUser.Email);
+        User? userCreated = await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == createUser.Email);
 
         return userCreated!;
     }
 
     private static string PasswordHash(string password) => BCrypt.Net.BCrypt.HashPassword(password);
 
-    private static bool Verify(string password, string passwordHash) =>
-        BCrypt.Net.BCrypt.Verify(password, passwordHash);
+    private static bool Verify(string password, string passwordHash) => BCrypt.Net.BCrypt.Verify(password, passwordHash);
 
     public async Task<User> AuthenticateAsync(LoginUserRequestDTO loginUser)
     {
@@ -69,5 +68,35 @@ public class UserRepository : Repository<User>, IUserRepository
 
         await _context.SaveChangesAsync();
         return user;
+    }
+
+    public Task AddAsync(UserResponseDTO dto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateAsync(UserResponseDTO dto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<UserResponseDTO>> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<IEnumerable<UserResponseDTO>>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<IEnumerable<UserResponseDTO>>> GetByConditionAsync(Expression<Func<User, bool>> predicate)
+    {
+        throw new NotImplementedException();
     }
 }

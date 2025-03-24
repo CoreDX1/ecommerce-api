@@ -18,6 +18,13 @@ public class GenericServiceAsync<TEntity, TDto> : ReadServiceAsync<TEntity, TDto
         return _unitOfWork.Repository<TEntity>().AddAsync(entityDto);
     }
 
+    public Task AddAsync<T>(T dto)
+    {
+        var entityDto = _mapper.Map<TEntity>(dto);
+
+        return _unitOfWork.Repository<TEntity>().AddAsync(entityDto);
+    }
+
     public Task DeleteAsync(int id)
     {
         var entity = _unitOfWork.Repository<TEntity>().GetByIdAsync(id);

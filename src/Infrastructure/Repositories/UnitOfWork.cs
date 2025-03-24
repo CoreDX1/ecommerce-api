@@ -1,7 +1,7 @@
 using Application.Common.Interfaces.Persistence;
+using Application.Common.Interfaces.Repositories;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Repositories;
 
@@ -13,7 +13,7 @@ public class UnitOfWork : IUnitOfWork
 
     public ICustomerRepository CustomerRepository { get; }
 
-    public IUserRepository UserRepository { get; }
+    public IUserServices UserRepository { get; }
 
     public IUsersRolesRepository UsersRolesRepository { get; }
 
@@ -27,7 +27,7 @@ public class UnitOfWork : IUnitOfWork
         PostgresContext context,
         IProductRepository productRepository,
         ICustomerRepository customerRepository,
-        IUserRepository userRepository,
+        IUserServices userRepository,
         IUsersRolesRepository usersRolesRepository
     )
     {

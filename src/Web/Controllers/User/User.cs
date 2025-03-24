@@ -18,14 +18,22 @@ public class User : ControllerBase
         _userService = userService;
     }
 
+    /// <summary>
+    /// Register a new user
+    /// </summary>
+    /// <param name="createUser">The user to register</param>
+    /// <returns> The created user </returns>
     [HttpPost("register")]
-    public async Task<Result<UserResponseDTO>> RegisterUser(
-        [FromBody] CreateUserRequestDTO createUser
-    )
+    public async Task<Result<UserResponseDTO>> RegisterUser([FromBody] CreateUserRequestDTO createUser)
     {
         return await _userService.RegisterAsync(createUser);
     }
 
+    /// <summary>
+    /// Login a user
+    /// </summary>
+    /// <param name="loginUser">The user to login</param>
+    /// <returns> The logged user </returns>
     [HttpPost("login")]
     public async Task<Result<UserResponseDTO>> LoginUser([FromBody] LoginUserRequestDTO loginUser)
     {

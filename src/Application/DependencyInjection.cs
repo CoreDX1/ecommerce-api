@@ -13,10 +13,7 @@ namespace Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(
-        this IServiceCollection services,
-        IConfiguration configuration
-    )
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         // Add services
         services.AddScoped<IUserService, UserServices>();
