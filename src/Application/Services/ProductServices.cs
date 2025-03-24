@@ -4,6 +4,7 @@ using Application.DTOs.Response.Product;
 using Application.Interfaces;
 using Ardalis.Result;
 using AutoMapper;
+using Domain.Common.Constants;
 using Domain.Entity;
 
 namespace Application.Services;
@@ -18,11 +19,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductByName(name);
 
         if (products == null)
-            return Result.NotFound("Product not found");
+            return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, "Product retrieved successfully");
+        return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetByPaginationAsync(
@@ -36,11 +37,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         );
 
         if (products == null)
-            return Result.NotFound("Product not found");
+            return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, "Product retrieved successfully");
+        return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(
@@ -52,11 +53,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         );
 
         if (products == null)
-            return Result.NotFound("Product not found");
+            return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, "Product retrieved successfully");
+        return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
@@ -64,10 +65,10 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllProducts();
 
         if (products == null)
-            return Result.NotFound("Product not found");
+            return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, "Product retrieved successfully");
+        return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 }

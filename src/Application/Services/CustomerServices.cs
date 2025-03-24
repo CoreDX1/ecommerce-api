@@ -4,6 +4,7 @@ using Application.DTOs.Request.Customer;
 using Application.DTOs.Response.Customer;
 using Ardalis.Result;
 using AutoMapper;
+using Domain.Common.Constants;
 using Domain.Entity;
 
 namespace Application.Services;
@@ -28,7 +29,7 @@ public class CustomerServices : ICustomerServices
 
         return Result.Success(
             _mapper.Map<CustomerResponseDTO>(customerDTo),
-            "Customer created successfully"
+            ReplyMessage.Success.Save
         );
     }
 
@@ -42,11 +43,11 @@ public class CustomerServices : ICustomerServices
         var customers = await _unitOfWork.CustomerRepository.GetAllAsync();
 
         if (customers == null)
-            return Result.NotFound("Customers not found");
+            return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var customersDto = _mapper.Map<IEnumerable<CustomerResponseDTO>>(customers);
 
-        return Result.Success(customersDto, "Customers retrieved successfully");
+        return Result.Success(customersDto, ReplyMessage.Success.Query);
     }
 
     public async Task<Result<CustomerResponseDTO>> GetCustomerById(int customerId)
@@ -54,11 +55,11 @@ public class CustomerServices : ICustomerServices
         var customer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerId);
 
         if (customer == null)
-            return Result.NotFound("Customer not found");
+            return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var customerResponse = _mapper.Map<CustomerResponseDTO>(customer);
 
-        return Result.Success(customerResponse, "Customer retrieved successfully");
+        return Result.Success(customerResponse, ReplyMessage.Success.Query);
     }
 
     public Task<Result> UpdateCustomer(UpdateCustomerRequestDTO customer)

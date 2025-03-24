@@ -8,6 +8,7 @@ using Application.DTOs.Request.User;
 using Application.DTOs.Response.User;
 using Ardalis.Result;
 using AutoMapper;
+using Domain.Common.Constants;
 using Domain.Entity;
 using FluentValidation;
 using FluentValidation.Results;
@@ -38,11 +39,11 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         User newUser = await _unitOfWork.UserRepository.RegisterUser(createUser);
 
         if (newUser == null)
-            return Result.NotFound("User not found");
+            return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var userResponse = _mapper.Map<UserResponseDTO>(newUser);
 
-        return Result.Success(userResponse, "User created successfully");
+        return Result.Success(userResponse, ReplyMessage.Success.Save);
     }
 
     private static List<ValidationError> GetValidationError(ValidationResult validationResult)
@@ -74,13 +75,13 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         User authenticatedUser = await _unitOfWork.UserRepository.AuthenticateAsync(loginUser);
 
         if (authenticatedUser == null)
-            return Result.NotFound("User not found");
+            return Result.NotFound(ReplyMessage.Validate.ValidateError);
 
         var userResponse = _mapper.Map<UserResponseDTO>(authenticatedUser);
 
         userResponse.VerificationToken = await GenerateJwtTokenAsync(authenticatedUser);
 
-        return Result.Success(userResponse, "User created successfully");
+        return Result.Success(userResponse, ReplyMessage.Success.Query);
     }
 
     private async Task<string> GenerateJwtTokenAsync(User loginUser)
