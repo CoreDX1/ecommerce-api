@@ -33,14 +33,14 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         _jwtConfig = jwtConfig.Value;
     }
 
-    public async Task<Result<UserResponseDTO>> RegisterUser(CreateUserRequestDTO createUser)
+    public async Task<Result<UserResponseDTO>> RegisterAsync(CreateUserRequestDTO createUser)
     {
-        User user = await _unitOfWork.User.RegisterUser(createUser);
+        User newUser = await _unitOfWork.UserRepository.RegisterUser(createUser);
 
-        if (user == null)
+        if (newUser == null)
             return Result.NotFound("User not found");
 
-        var userResponse = _mapper.Map<UserResponseDTO>(user);
+        var userResponse = _mapper.Map<UserResponseDTO>(newUser);
 
         return Result.Success(userResponse, "User created successfully");
     }
@@ -64,28 +64,28 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         return validationError;
     }
 
-    public async Task<Result<UserResponseDTO>> LoginUser(LoginUserRequestDTO loginUser)
+    public async Task<Result<UserResponseDTO>> LoginAsync(LoginUserRequestDTO loginUser)
     {
         var validationResult = await _validator.ValidateAsync(loginUser);
 
         if (!validationResult.IsValid)
             return Result.Invalid(GetValidationError(validationResult));
 
-        User user = await _unitOfWork.User.LoginUser(loginUser);
+        User authenticatedUser = await _unitOfWork.UserRepository.AuthenticateAsync(loginUser);
 
-        if (user == null)
+        if (authenticatedUser == null)
             return Result.NotFound("User not found");
 
-        var userResponse = _mapper.Map<UserResponseDTO>(user);
+        var userResponse = _mapper.Map<UserResponseDTO>(authenticatedUser);
 
-        userResponse.VerificationToken = await GenerateJwtToken(user);
+        userResponse.VerificationToken = await GenerateJwtTokenAsync(authenticatedUser);
 
         return Result.Success(userResponse, "User created successfully");
     }
 
-    private async Task<string> GenerateJwtToken(User loginUser)
+    private async Task<string> GenerateJwtTokenAsync(User loginUser)
     {
-        List<string> roles = await _unitOfWork.UsersRoles.GetRoles(loginUser.UserId);
+        List<string> userRoles = await _unitOfWork.UsersRolesRepository.GetRoles(loginUser.UserId);
 
         List<Claim> claims =
         [
@@ -97,24 +97,27 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
             // new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString()),
         ];
 
-        foreach (var role in roles)
+        foreach (var roleName in userRoles)
         {
-            claims.Add(new Claim("role", role));
-            claims.Add(new Claim(ClaimTypes.Role, role));
+            claims.Add(new Claim("role", roleName));
+            claims.Add(new Claim(ClaimTypes.Role, roleName));
         }
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.SecretKey));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.SecretKey));
 
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var singningCredentials = new SigningCredentials(
+            securityKey,
+            SecurityAlgorithms.HmacSha256
+        );
 
-        var token = new JwtSecurityToken(
+        var jwtToken = new JwtSecurityToken(
             issuer: _jwtConfig.Issuer,
             audience: _jwtConfig.Audience,
             claims: claims,
             expires: DateTime.UtcNow.AddDays(1),
-            signingCredentials: creds
+            signingCredentials: singningCredentials
         );
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return new JwtSecurityTokenHandler().WriteToken(jwtToken);
     }
 }

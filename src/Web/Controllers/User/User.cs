@@ -1,3 +1,4 @@
+using Application.Common.Interfaces;
 using Application.DTOs.Request.User;
 using Application.DTOs.Response.User;
 using Application.Interfaces;
@@ -22,12 +23,12 @@ public class User : ControllerBase
         [FromBody] CreateUserRequestDTO createUser
     )
     {
-        return await _userService.RegisterUser(createUser);
+        return await _userService.RegisterAsync(createUser);
     }
 
     [HttpPost("login")]
     public async Task<Result<UserResponseDTO>> LoginUser([FromBody] LoginUserRequestDTO loginUser)
     {
-        return await _userService.LoginUser(loginUser);
+        return await _userService.LoginAsync(loginUser);
     }
 }

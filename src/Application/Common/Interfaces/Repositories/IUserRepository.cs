@@ -6,5 +6,5 @@ namespace Application.Interfaces.Repositories;
 public interface IUserRepository : IRepository<User>
 {
     Task<User> RegisterUser(CreateUserRequestDTO createUser);
-    Task<User> LoginUser(LoginUserRequestDTO loginUser);
+    Task<User> AuthenticateAsync(LoginUserRequestDTO loginUser);
 }

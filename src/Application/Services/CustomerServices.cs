@@ -24,7 +24,7 @@ public class CustomerServices : ICustomerServices
         var customerDTo = _mapper.Map<Customer>(customer);
         customerDTo.RegistrationDate = DateTime.Now;
 
-        await _unitOfWork.Customer.AddAsync(customerDTo);
+        await _unitOfWork.CustomerRepository.AddAsync(customerDTo);
 
         return Result.Success(
             _mapper.Map<CustomerResponseDTO>(customerDTo),
@@ -39,7 +39,7 @@ public class CustomerServices : ICustomerServices
 
     public async Task<Result<IEnumerable<CustomerResponseDTO>>> GetAllCustomers()
     {
-        var customers = await _unitOfWork.Customer.GetAllAsync();
+        var customers = await _unitOfWork.CustomerRepository.GetAllAsync();
 
         if (customers == null)
             return Result.NotFound("Customers not found");
@@ -51,7 +51,7 @@ public class CustomerServices : ICustomerServices
 
     public async Task<Result<CustomerResponseDTO>> GetCustomerById(int customerId)
     {
-        var customer = await _unitOfWork.Customer.GetByIdAsync(customerId);
+        var customer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerId);
 
         if (customer == null)
             return Result.NotFound("Customer not found");

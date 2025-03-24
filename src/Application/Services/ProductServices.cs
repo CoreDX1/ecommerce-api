@@ -15,7 +15,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(string name)
     {
-        IEnumerable<Product> products = await _unitOfWork.Product.GetProductByName(name);
+        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductByName(name);
 
         if (products == null)
             return Result.NotFound("Product not found");
@@ -30,7 +30,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         int recordsPerPage
     )
     {
-        IEnumerable<Product> products = await _unitOfWork.Product.GetByPaginationAsync(
+        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetByPaginationAsync(
             page,
             recordsPerPage
         );
@@ -47,7 +47,9 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         FilterProductRequestDTO filter
     )
     {
-        IEnumerable<Product> products = await _unitOfWork.Product.GetProductsByFilter(filter);
+        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByFilter(
+            filter
+        );
 
         if (products == null)
             return Result.NotFound("Product not found");
@@ -59,7 +61,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
     {
-        IEnumerable<Product> products = await _unitOfWork.Product.GetAllProducts();
+        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllProducts();
 
         if (products == null)
             return Result.NotFound("Product not found");

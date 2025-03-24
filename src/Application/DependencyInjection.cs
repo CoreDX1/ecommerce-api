@@ -1,4 +1,5 @@
 using System.Reflection;
+using Application.Common.Interfaces;
 using Application.Configuration;
 using Application.DTOs.Request.User;
 using Application.Interfaces;

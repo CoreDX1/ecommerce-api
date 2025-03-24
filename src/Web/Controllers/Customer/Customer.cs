@@ -1,6 +1,6 @@
+using Application.Common.Interfaces;
 using Application.DTOs.Request.Customer;
 using Application.DTOs.Response.Customer;
-using Application.Interfaces;
 using Ardalis.Result;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +18,7 @@ public class Customer : ControllerBase
     }
 
     [HttpGet("all")] // GET: api/Customers
-    public async Task<Result<List<CustomerResponseDTO>>> GetAllCustomers()
+    public async Task<Result<IEnumerable<CustomerResponseDTO>>> GetAllCustomers()
     {
         return await _customerServices.GetAllCustomers();
     }

@@ -56,7 +56,7 @@ public class UserRepository : Repository<User>, IUserRepository
     private static bool Verify(string password, string passwordHash) =>
         BCrypt.Net.BCrypt.Verify(password, passwordHash);
 
-    public async Task<User> LoginUser(LoginUserRequestDTO loginUser)
+    public async Task<User> AuthenticateAsync(LoginUserRequestDTO loginUser)
     {
         User? user = await SingleOrDefaultAsync(x => x.Email == loginUser.Email);
 

@@ -1,4 +1,4 @@
-using Application.Interfaces.Persistence;
+using Application.Common.Interfaces.Persistence;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories;

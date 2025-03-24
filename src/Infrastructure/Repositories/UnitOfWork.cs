@@ -1,4 +1,4 @@
-using Application.Interfaces.Persistence;
+using Application.Common.Interfaces.Persistence;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
@@ -9,13 +9,13 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly PostgresContext _context;
 
-    public IProductRepository Product { get; }
+    public IProductRepository ProductRepository { get; }
 
-    public ICustomerRepository Customer { get; }
+    public ICustomerRepository CustomerRepository { get; }
 
-    public IUserRepository User { get; }
+    public IUserRepository UserRepository { get; }
 
-    public IUsersRolesRepository UsersRoles { get; }
+    public IUsersRolesRepository UsersRolesRepository { get; }
 
     public IRepository<TEntity> Repository<TEntity>()
         where TEntity : class
@@ -32,10 +32,10 @@ public class UnitOfWork : IUnitOfWork
     )
     {
         _context = context;
-        Product = productRepository;
-        Customer = customerRepository;
-        User = userRepository;
-        UsersRoles = usersRolesRepository;
+        ProductRepository = productRepository;
+        CustomerRepository = customerRepository;
+        UserRepository = userRepository;
+        UsersRolesRepository = usersRolesRepository;
     }
 
     public void Dispose()
