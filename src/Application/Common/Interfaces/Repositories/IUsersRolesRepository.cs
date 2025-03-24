@@ -4,5 +4,5 @@ namespace Application.Interfaces.Repositories;
 
 public interface IUsersRolesRepository : IRepository<UsersRole>
 {
-    Task<List<string>> GetRoles(int roleId);
+    Task<IEnumerable<string>> GetRoles(User user);
 }

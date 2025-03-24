@@ -4,9 +4,7 @@ using AutoMapper;
 
 namespace Application.Services;
 
-public class GenericServiceAsync<TEntity, TDto>
-    : ReadServiceAsync<TEntity, TDto>,
-        IGenericServiceAsync<TEntity, TDto>
+public class GenericServiceAsync<TEntity, TDto> : ReadServiceAsync<TEntity, TDto>, IGenericServiceAsync<TEntity, TDto>
     where TEntity : class
     where TDto : class
 {

@@ -10,10 +10,10 @@ public class UsersRolesRepository : Repository<UsersRole>, IUsersRolesRepository
     public UsersRolesRepository(PostgresContext context)
         : base(context) { }
 
-    public async Task<List<string>> GetRoles(int roleId)
+    public async Task<IEnumerable<string>> GetRoles(User user)
     {
         var roles = await _context
-            .UsersRoles.Where(ur => ur.UserId == roleId)
+            .UsersRoles.Where(ur => ur.UserId == user.UserId)
             .Include(ur => ur.Role)
             .Select(ur => ur.Role.RoleName)
             .ToListAsync();

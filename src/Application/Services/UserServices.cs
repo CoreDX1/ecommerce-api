@@ -86,7 +86,7 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 
     private async Task<string> GenerateJwtTokenAsync(User loginUser)
     {
-        List<string> userRoles = await _unitOfWork.UsersRolesRepository.GetRoles(loginUser.UserId);
+        IEnumerable<string> userRoles = await _unitOfWork.UsersRolesRepository.GetRoles(loginUser);
 
         List<Claim> claims =
         [
@@ -104,14 +104,11 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
             claims.Add(new Claim(ClaimTypes.Role, roleName));
         }
 
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.SecretKey));
+        SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_jwtConfig.SecretKey));
 
-        var singningCredentials = new SigningCredentials(
-            securityKey,
-            SecurityAlgorithms.HmacSha256
-        );
+        SigningCredentials singningCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
-        var jwtToken = new JwtSecurityToken(
+        JwtSecurityToken jwtToken = new(
             issuer: _jwtConfig.Issuer,
             audience: _jwtConfig.Audience,
             claims: claims,

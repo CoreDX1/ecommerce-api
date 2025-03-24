@@ -26,15 +26,9 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetByPaginationAsync(
-        int page,
-        int recordsPerPage
-    )
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetByPaginationAsync(int page, int recordsPerPage)
     {
-        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetByPaginationAsync(
-            page,
-            recordsPerPage
-        );
+        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetByPaginationAsync(page, recordsPerPage);
 
         if (products == null)
             return Result.NotFound(ReplyMessage.Error.NotFound);
@@ -44,13 +38,9 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
-    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(
-        FilterProductRequestDTO filter
-    )
+    public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(FilterProductRequestDTO filter)
     {
-        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByFilter(
-            filter
-        );
+        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByFilter(filter);
 
         if (products == null)
             return Result.NotFound(ReplyMessage.Error.NotFound);
