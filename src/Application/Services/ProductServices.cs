@@ -13,18 +13,21 @@ namespace Application.Services;
 public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>, IProductServices
 {
     private readonly IValidator<CreateProductRequestDTO> _createProductValidator;
+    private readonly IValidator<UpdateProductRequestDTO> _updateProductValidator;
     private readonly IValidatorServices _validatorServices;
 
     public ProductServices(
         IUnitOfWork unitOfWork,
         IMapper mapper,
         IValidator<CreateProductRequestDTO> createProductValidator,
-        IValidatorServices validatorServices
+        IValidatorServices validatorServices,
+        IValidator<UpdateProductRequestDTO> updateProductValidator
     )
         : base(unitOfWork, mapper)
     {
         _createProductValidator = createProductValidator;
         _validatorServices = validatorServices;
+        _updateProductValidator = updateProductValidator;
     }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductByName(string name)
@@ -75,6 +78,8 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
+    // Esto tiene que estar en el Servico generico
+    // Que los nombres de los productos no se repitan
     public async Task<Result<ProductResponseDTO>> CreateProduct(CreateProductRequestDTO createProduct)
     {
         var validationResult = await _createProductValidator.ValidateAsync(createProduct);
@@ -82,30 +87,54 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         if (!validationResult.IsValid)
             return Result.Invalid(_validatorServices.GetValidationError(validationResult));
 
-        var productMapper = _mapper.Map<Product>(createProduct);
+        await AddAsync(createProduct);
 
-        await AddAsync(productMapper);
-
-        var productCreated = _unitOfWork.ProductRepository.GetByIdAsync(productMapper.ProductId);
+        var productCreated = _unitOfWork.ProductRepository.GetProductByName(createProduct.Name);
 
         var productResponse = _mapper.Map<ProductResponseDTO>(productCreated);
 
         return Result.Success(productResponse, ReplyMessage.Success.Save);
     }
 
-    public Task<Result<ProductResponseDTO>> UpdateProduct(UpdateProductRequestDTO updateProduct)
+    // Que los nombres de los productos no se repitan
+    public async Task<Result<ProductResponseDTO>> UpdateProduct(UpdateProductRequestDTO updateProduct)
     {
-        throw new NotImplementedException();
+        var validationResult = await _updateProductValidator.ValidateAsync(updateProduct);
+        if (!validationResult.IsValid)
+            return Result.Invalid(_validatorServices.GetValidationError(validationResult));
+
+        await UpdateAsync(updateProduct);
+
+        Product? productUpdated = await _unitOfWork.ProductRepository.FindOneAsync(x => x.Name.ToLower() == updateProduct.Name.ToLower());
+
+        var productResponse = _mapper.Map<ProductResponseDTO>(productUpdated);
+
+        return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
-    public Task<Result<ProductResponseDTO>> DeleteProduct(int productId)
+    public async Task<Result<ProductResponseDTO>> DeleteProduct(int productId)
     {
-        throw new NotImplementedException();
+        await DeleteAsync(productId);
+
+        var productDeleted = await _unitOfWork.ProductRepository.FindOneAsync(x => x.ProductId == productId);
+        if (productDeleted == null)
+            return Result.NotFound(ReplyMessage.Error.NotFound);
+
+        var productResponse = _mapper.Map<ProductResponseDTO>(productDeleted);
+
+        return Result.Success(productResponse, ReplyMessage.Success.Delete);
     }
 
-    public Task<Result<ProductResponseDTO>> GetProductById(int productId)
+    public async Task<Result<ProductResponseDTO>> GetProductById(int productId)
     {
-        throw new NotImplementedException();
+        Product? product = await _unitOfWork.ProductRepository.FindOneAsync(x => x.ProductId == productId);
+
+        if (product == null)
+            return Result.NotFound(ReplyMessage.Error.NotFound);
+
+        var productResponse = _mapper.Map<ProductResponseDTO>(product);
+
+        return Result.Success(productResponse, ReplyMessage.Success.Query);
     }
 
     public Task<Result<ProductResponseDTO>> GetProductByCategoryId(int categoryId)
