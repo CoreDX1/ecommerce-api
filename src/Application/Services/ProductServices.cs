@@ -34,7 +34,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductByName(name);
 
-        if (products == null)
+        if (products == null || products.Any())
             return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
@@ -46,7 +46,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetByPaginationAsync(page, recordsPerPage);
 
-        if (products == null)
+        if (products == null || products.Any())
             return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
@@ -58,7 +58,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByFilter(filter);
 
-        if (products == null)
+        if (products == null || products.Any())
             return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
@@ -70,7 +70,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllProducts();
 
-        if (products == null)
+        if (products == null || products.Any())
             return Result.NotFound(ReplyMessage.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
@@ -87,11 +87,14 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         if (!validationResult.IsValid)
             return Result.Invalid(_validatorServices.GetValidationError(validationResult));
 
+        Product? existingProduct = await _unitOfWork.ProductRepository.FindOneAsync(x => x.Name.ToLower().Equals(createProduct.Name.ToLower()));
+
+        if (existingProduct != null)
+            return Result.Error(ReplyMessage.Error.Exists);
+
         await AddAsync(createProduct);
 
-        var productCreated = _unitOfWork.ProductRepository.GetProductByName(createProduct.Name);
-
-        var productResponse = _mapper.Map<ProductResponseDTO>(productCreated);
+        var productResponse = _mapper.Map<ProductResponseDTO>(existingProduct);
 
         return Result.Success(productResponse, ReplyMessage.Success.Save);
     }
