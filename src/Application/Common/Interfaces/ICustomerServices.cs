@@ -2,11 +2,15 @@ using Application.DTOs.Request.Customer;
 using Application.DTOs.Response.Customer;
 using Ardalis.Result;
 
-namespace Application.Interfaces;
+namespace Application.Common.Interfaces;
 
 public interface ICustomerServices
 {
-    Task<Result<List<CustomerResponseDTO>>> GetAllCustomers();
+    /// <summary>
+    /// Obtener todos los clientes
+    /// </summary>
+    /// <returns> Resultado con la lista de clientes </returns>
+    Task<Result<IEnumerable<CustomerResponseDTO>>> GetAllCustomers();
     Task<Result<CustomerResponseDTO>> GetCustomerById(int customerId);
     Task<Result<CustomerResponseDTO>> CreateCustomer(CreateCustomerRequestDTO customer);
     Task<Result> UpdateCustomer(UpdateCustomerRequestDTO customer);

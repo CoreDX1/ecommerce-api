@@ -48,17 +48,36 @@ public class FindOptions
 public interface IRepository<TEntity>
     where TEntity : class
 {
-    Task<IEnumerable<TEntity>> GetAllAsync(FindOptions? findOptions = null, CancellationToken cancellationToken = default);
-    Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> expression, FindOptions? findOptions = null, CancellationToken cancellationToken = default);
+    Task<IEnumerable<TEntity>> GetAllAsync(
+        FindOptions? findOptions = null,
+        CancellationToken cancellationToken = default
+    );
+    Task<TEntity?> FindOneAsync(
+        Expression<Func<TEntity, bool>> expression,
+        FindOptions? findOptions = null,
+        CancellationToken cancellationToken = default
+    );
     Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
     Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task AddManyAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
     Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
-    Task DeleteManyAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
-    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
-    Task<int> CountAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
-    Task<TEntity?> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
+    Task DeleteManyAsync(
+        IEnumerable<TEntity> entities,
+        CancellationToken cancellationToken = default
+    );
+    Task<bool> AnyAsync(
+        Expression<Func<TEntity, bool>> expression,
+        CancellationToken cancellationToken = default
+    );
+    Task<int> CountAsync(
+        Expression<Func<TEntity, bool>> expression,
+        CancellationToken cancellationToken = default
+    );
+    Task<TEntity?> SingleOrDefaultAsync(
+        Expression<Func<TEntity, bool>> expression,
+        CancellationToken cancellationToken = default
+    );
 
     // IQueryable<TEntity> GetAll<T, Tkey>()
     //     where T : Entity<Tkey>;

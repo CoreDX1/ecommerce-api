@@ -1,7 +1,7 @@
+using Application.Common.Interfaces;
+using Application.Common.Interfaces.Persistence;
 using Application.DTOs.Request.Customer;
 using Application.DTOs.Response.Customer;
-using Application.Interfaces;
-using Application.Interfaces.Persistence;
 using Ardalis.Result;
 using AutoMapper;
 using Domain.Entity;
@@ -37,14 +37,14 @@ public class CustomerServices : ICustomerServices
         throw new NotImplementedException();
     }
 
-    public async Task<Result<List<CustomerResponseDTO>>> GetAllCustomers()
+    public async Task<Result<IEnumerable<CustomerResponseDTO>>> GetAllCustomers()
     {
         var customers = await _unitOfWork.Customer.GetAllAsync();
 
         if (customers == null)
             return Result.NotFound("Customers not found");
 
-        var customersDto = _mapper.Map<List<CustomerResponseDTO>>(customers);
+        var customersDto = _mapper.Map<IEnumerable<CustomerResponseDTO>>(customers);
 
         return Result.Success(customersDto, "Customers retrieved successfully");
     }

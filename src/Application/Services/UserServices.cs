@@ -1,17 +1,16 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Common.Interfaces;
+using Application.Common.Interfaces.Persistence;
 using Application.Configuration;
 using Application.DTOs.Request.User;
 using Application.DTOs.Response.User;
-using Application.Interfaces;
-using Application.Interfaces.Persistence;
 using Ardalis.Result;
 using AutoMapper;
 using Domain.Entity;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -86,22 +85,17 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 
     private async Task<string> GenerateJwtToken(User loginUser)
     {
-        var roles = await _unitOfWork.UsersRoles.GetRoles(loginUser.UserId);
+        List<string> roles = await _unitOfWork.UsersRoles.GetRoles(loginUser.UserId);
 
-        foreach (var role in roles)
-        {
-            Console.WriteLine(role);
-        }
-
-        var claims = new List<Claim>
-        {
+        List<Claim> claims =
+        [
             new(JwtRegisteredClaimNames.Sub, loginUser.Username),
             new(JwtRegisteredClaimNames.Jti, loginUser.UserId.ToString()),
             // Cuando se quiere validar el tiempo de caducidad del token
             // new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()),
             // Cuando se quiere validar el tiempo de caducidad del token
             // new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString()),
-        };
+        ];
 
         foreach (var role in roles)
         {

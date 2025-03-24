@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Ardalis.Result;
 
-namespace Application.Interfaces;
+namespace Application.Common.Interfaces;
 
 public interface IReadServiceAsync<TEntity, TDto>
     where TEntity : class

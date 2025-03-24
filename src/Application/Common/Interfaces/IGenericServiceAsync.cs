@@ -1,4 +1,4 @@
-namespace Application.Interfaces;
+namespace Application.Common.Interfaces;
 
 public interface IGenericServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
     where TEntity : class

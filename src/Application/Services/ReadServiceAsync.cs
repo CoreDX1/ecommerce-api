@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
-using Application.Interfaces;
-using Application.Interfaces.Persistence;
+using Application.Common.Interfaces;
+using Application.Common.Interfaces.Persistence;
 using Ardalis.Result;
 using AutoMapper;
 

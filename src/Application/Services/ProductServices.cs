@@ -1,7 +1,7 @@
+using Application.Common.Interfaces.Persistence;
 using Application.DTOs.Request.Product;
 using Application.DTOs.Response.Product;
 using Application.Interfaces;
-using Application.Interfaces.Persistence;
 using Ardalis.Result;
 using AutoMapper;
 using Domain.Entity;

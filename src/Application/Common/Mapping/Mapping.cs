@@ -6,7 +6,7 @@ using Application.DTOs.Response.User;
 using AutoMapper;
 using Domain.Entity;
 
-namespace Application.Mapping;
+namespace Application.Common.Mapping;
 
 public class Mapping : Profile
 {

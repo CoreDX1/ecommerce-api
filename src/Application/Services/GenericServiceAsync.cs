@@ -1,5 +1,5 @@
-using Application.Interfaces;
-using Application.Interfaces.Persistence;
+using Application.Common.Interfaces;
+using Application.Common.Interfaces.Persistence;
 using AutoMapper;
 
 namespace Application.Services;
@@ -22,7 +22,9 @@ public class GenericServiceAsync<TEntity, TDto>
 
     public Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var entity = _unitOfWork.Repository<TEntity>().GetByIdAsync(id);
+        var entityDto = _mapper.Map<TEntity>(entity);
+        return _unitOfWork.Repository<TEntity>().DeleteAsync(entityDto);
     }
 
     public Task UpdateAsync(TDto dto)
