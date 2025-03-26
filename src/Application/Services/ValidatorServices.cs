@@ -8,20 +8,24 @@ public class ValidatorServices : IValidatorServices
 {
     public List<ValidationError> GetValidationError(ValidationResult validationResult)
     {
-        List<ValidationError> validationError = [];
+        return validationResult
+            .Errors.Select(error => new ValidationError
+            {
+                ErrorMessage = error.ErrorMessage,
+                Identifier = error.PropertyName,
+                ErrorCode = error.ErrorCode,
+            })
+            .ToList();
+    }
 
-        foreach (var error in validationResult.Errors)
-        {
-            validationError.Add(
-                new ValidationError()
-                {
-                    ErrorMessage = error.ErrorMessage,
-                    Identifier = error.PropertyName,
-                    ErrorCode = error.ErrorCode,
-                }
-            );
-        }
+    // Opcional: Ayuda a devolver directamente un Result.Invalid
+    public Result<T> GetInvalidResult<T>(ValidationResult validationResult)
+    {
+        return Result<T>.Invalid(GetValidationError(validationResult));
+    }
 
-        return validationError;
+    public Result GetInvalidResult(ValidationResult validationResult)
+    {
+        return Result.Invalid(GetValidationError(validationResult));
     }
 }

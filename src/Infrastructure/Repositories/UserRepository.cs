@@ -17,7 +17,7 @@ public class UserRepository : Repository<User>, IUserRepository
         _customerRepository = customerRepository;
     }
 
-    public async Task<User> RegisterUser(CreateUserRequestDTO createUser)
+    public async Task<User> RegisterUser(RegisterUserRequestDTO createUser)
     {
         Customer customer = new()
         {

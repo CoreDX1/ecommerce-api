@@ -6,18 +6,18 @@ using Ardalis.Result;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers.Administration;
+namespace Web.Controllers.Admin;
 
 [Authorize(Roles = "admin")]
-[Route("api/[controller]")]
 [ApiController]
-public class Administration : ControllerBase
+[Route("api/[controller]")]
+public class Admin : ControllerBase
 {
     private readonly IProductServices _productService;
     private readonly IUserService _userService;
     private readonly IUserRolesService _userRolesService;
 
-    public Administration(IProductServices productService, IUserService userSerice, IUserRolesService userRolesService)
+    public Admin(IProductServices productService, IUserService userSerice, IUserRolesService userRolesService)
     {
         _productService = productService;
         _userService = userSerice;
@@ -25,12 +25,18 @@ public class Administration : ControllerBase
     }
 
     [HttpGet] // GET: api/Administration
+    [ProducesResponseType(typeof(IEnumerable<ProductResponseDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
     {
         return await _productService.GetAllProducts();
     }
 
     [HttpGet("users")]
+    [ProducesResponseType(typeof(IEnumerable<UserResponseDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<Result<IEnumerable<UserResponseDTO>>> GetAllUsers()
     {
         return await _userService.GetAllAsync();

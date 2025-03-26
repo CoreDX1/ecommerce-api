@@ -20,6 +20,7 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 {
     private readonly JwtConfig _jwtConfig;
     private readonly IValidator<LoginUserRequestDTO> _validator;
+    private readonly IValidator<RegisterUserRequestDTO> _createUserValidator;
     private readonly IValidatorServices _validatorServices;
 
     public UserServices(
@@ -27,25 +28,32 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         IMapper mapper,
         IValidator<LoginUserRequestDTO> validator,
         IOptions<JwtConfig> jwtConfig,
-        IValidatorServices validatorServices
+        IValidatorServices validatorServices,
+        IValidator<RegisterUserRequestDTO> createUserValidator
     )
         : base(unitOfWork, mapper)
     {
         _validator = validator;
         _jwtConfig = jwtConfig.Value;
         _validatorServices = validatorServices;
+        _createUserValidator = createUserValidator;
     }
 
-    public async Task<Result<UserResponseDTO>> RegisterAsync(CreateUserRequestDTO createUser)
+    public async Task<Result<UserResponseDTO>> RegisterAsync(RegisterUserRequestDTO createUser)
     {
         User newUser = await _unitOfWork.UserRepository.RegisterUser(createUser);
+
+        var validationResult = await _createUserValidator.ValidateAsync(createUser);
+
+        if (!validationResult.IsValid)
+            return Result.Invalid(_validatorServices.GetValidationError(validationResult));
 
         if (newUser == null)
             return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var userResponse = _mapper.Map<UserResponseDTO>(newUser);
 
-        return Result.Success(userResponse, ReplyMessages.Success.Save);
+        return Result.Created(userResponse, ReplyMessages.Success.Save);
     }
 
     public async Task<Result<UserResponseDTO>> LoginAsync(LoginUserRequestDTO loginUser)
@@ -53,12 +61,12 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         var validationResult = await _validator.ValidateAsync(loginUser);
 
         if (!validationResult.IsValid)
-            return Result.Invalid(_validatorServices.GetValidationError(validationResult));
+            return _validatorServices.GetInvalidResult(validationResult);
 
         User authenticatedUser = await _unitOfWork.UserRepository.AuthenticateAsync(loginUser);
 
         if (authenticatedUser == null)
-            return Result.NotFound(ReplyMessages.Validate.ValidateError);
+            return Result.Unauthorized(ReplyMessages.Validate.ValidateError);
 
         var userResponse = _mapper.Map<UserResponseDTO>(authenticatedUser);
 

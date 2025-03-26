@@ -5,5 +5,7 @@ namespace Application.Common.Interfaces;
 
 public interface IValidatorServices
 {
-    public List<ValidationError> GetValidationError(ValidationResult validationResult);
+    List<ValidationError> GetValidationError(ValidationResult validationResult);
+    Result<T> GetInvalidResult<T>(ValidationResult validationResult);
+    Result GetInvalidResult(ValidationResult validationResult);
 }

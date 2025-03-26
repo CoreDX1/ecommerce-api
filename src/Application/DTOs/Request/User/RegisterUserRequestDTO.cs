@@ -1,6 +1,6 @@
 namespace Application.DTOs.Request.User;
 
-public class CreateUserRequestDTO
+public class RegisterUserRequestDTO
 {
     public int? CustomerId { get; set; }
 

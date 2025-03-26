@@ -1,10 +1,10 @@
 namespace Application.Common.Interfaces;
 
-public interface IGenericServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
+public interface IGenericServiceAsync<TEntity, TResponseDto> : IReadServiceAsync<TEntity, TResponseDto>
     where TEntity : class
-    where TDto : class
+    where TResponseDto : class
 {
-    Task AddAsync(TDto dto);
+    Task AddAsync(TResponseDto dto);
     Task DeleteAsync(int id);
-    Task UpdateAsync(TDto dto);
+    Task UpdateAsync(TResponseDto dto);
 }

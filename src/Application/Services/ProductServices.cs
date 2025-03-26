@@ -34,7 +34,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductByName(name);
 
-        if (products == null || products.Any())
+        if (products == null || !products.Any())
             return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
@@ -46,7 +46,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetByPaginationAsync(page, recordsPerPage);
 
-        if (products == null || products.Any())
+        if (products == null || !products.Any())
             return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);

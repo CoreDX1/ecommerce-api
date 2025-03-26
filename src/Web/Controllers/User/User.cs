@@ -23,7 +23,7 @@ public class User : ControllerBase
     /// <param name="createUser">The user to register</param>
     /// <returns> The created user </returns>
     [HttpPost("register")]
-    public async Task<Result<UserResponseDTO>> RegisterUser([FromBody] CreateUserRequestDTO createUser)
+    public async Task<Result<UserResponseDTO>> RegisterUser([FromBody] RegisterUserRequestDTO createUser)
     {
         return await _userService.RegisterAsync(createUser);
     }
