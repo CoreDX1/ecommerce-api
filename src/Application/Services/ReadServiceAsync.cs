@@ -27,9 +27,9 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
         var entitiesResponse = _mapper.Map<IEnumerable<TDto>>(entities);
 
         if (entities == null)
-            return Result.NotFound("Entities not found");
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
-        return Result.Success(entitiesResponse, "Entities retrieved successfully");
+        return Result.Success(entitiesResponse, ReplyMessages.Success.Query);
     }
 
     public async Task<Result<TDto>> GetByIdAsync(int id)
@@ -50,8 +50,8 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
         var entitiesResponse = _mapper.Map<IEnumerable<TDto>>(entities);
 
         if (entities == null)
-            return Result.NotFound("Entities not found");
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
-        return Result.Success(entitiesResponse, "Entities retrieved successfully");
+        return Result.Success(entitiesResponse, ReplyMessages.Success.Query);
     }
 }
