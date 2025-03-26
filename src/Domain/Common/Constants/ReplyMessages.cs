@@ -1,8 +1,8 @@
 namespace Domain.Common.Constants;
 
-public class ReplyMessage
+public class ReplyMessages
 {
-    private ReplyMessage() { } // Prevent instantiation
+    private ReplyMessages() { } // Prevent instantiation
 
     public static class Success
     {

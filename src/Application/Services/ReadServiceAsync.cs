@@ -3,6 +3,7 @@ using Application.Common.Interfaces;
 using Application.Common.Interfaces.Persistence;
 using Ardalis.Result;
 using AutoMapper;
+using Domain.Common.Constants;
 
 namespace Application.Services;
 
@@ -36,11 +37,11 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
         TEntity? entity = await _unitOfWork.Repository<TEntity>().GetByIdAsync(id);
 
         if (entity == null)
-            return Result.NotFound("Entity not found");
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var entityResponse = _mapper.Map<TDto>(entity);
 
-        return Result.Success(entityResponse, "Entity retrieved successfully");
+        return Result.Success(entityResponse, ReplyMessages.Success.Query);
     }
 
     public async Task<Result<IEnumerable<TDto>>> GetByConditionAsync(Expression<Func<TEntity, bool>> predicate)

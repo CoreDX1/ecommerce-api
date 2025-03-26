@@ -1,6 +1,5 @@
 using Application.Common.Interfaces.Persistence;
 using Application.Common.Interfaces.Repositories;
-using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<IUserServices, UserRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUsersRolesRepository, UsersRolesRepository>();
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

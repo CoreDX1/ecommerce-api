@@ -41,11 +41,11 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         User newUser = await _unitOfWork.UserRepository.RegisterUser(createUser);
 
         if (newUser == null)
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var userResponse = _mapper.Map<UserResponseDTO>(newUser);
 
-        return Result.Success(userResponse, ReplyMessage.Success.Save);
+        return Result.Success(userResponse, ReplyMessages.Success.Save);
     }
 
     public async Task<Result<UserResponseDTO>> LoginAsync(LoginUserRequestDTO loginUser)
@@ -58,18 +58,18 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         User authenticatedUser = await _unitOfWork.UserRepository.AuthenticateAsync(loginUser);
 
         if (authenticatedUser == null)
-            return Result.NotFound(ReplyMessage.Validate.ValidateError);
+            return Result.NotFound(ReplyMessages.Validate.ValidateError);
 
         var userResponse = _mapper.Map<UserResponseDTO>(authenticatedUser);
 
         userResponse.VerificationToken = await GenerateJwtTokenAsync(authenticatedUser);
 
-        return Result.Success(userResponse, ReplyMessage.Success.Query);
+        return Result.Success(userResponse, ReplyMessages.Success.Query);
     }
 
     private async Task<string> GenerateJwtTokenAsync(User loginUser)
     {
-        IEnumerable<string> userRoles = await _unitOfWork.UsersRolesRepository.GetRoles(loginUser);
+        IEnumerable<string> userRoles = await _unitOfWork.UsersRolesRepository.GetRoles(loginUser.UserId);
 
         List<Claim> claims =
         [

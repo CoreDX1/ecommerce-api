@@ -1,8 +1,8 @@
 using Domain.Entity;
 
-namespace Application.Interfaces.Repositories;
+namespace Application.Common.Interfaces.Repositories;
 
 public interface IUsersRolesRepository : IRepository<UsersRole>
 {
-    Task<IEnumerable<string>> GetRoles(User user);
+    Task<IEnumerable<string>> GetRoles(int userId);
 }

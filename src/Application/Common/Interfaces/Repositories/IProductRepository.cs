@@ -1,7 +1,7 @@
 using Application.DTOs.Request.Product;
 using Domain.Entity;
 
-namespace Application.Interfaces.Repositories;
+namespace Application.Common.Interfaces.Repositories;
 
 public interface IProductRepository : IRepository<Product>
 {

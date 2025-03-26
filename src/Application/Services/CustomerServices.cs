@@ -27,10 +27,7 @@ public class CustomerServices : ICustomerServices
 
         await _unitOfWork.CustomerRepository.AddAsync(customerDTo);
 
-        return Result.Success(
-            _mapper.Map<CustomerResponseDTO>(customerDTo),
-            ReplyMessage.Success.Save
-        );
+        return Result.Success(_mapper.Map<CustomerResponseDTO>(customerDTo), ReplyMessages.Success.Save);
     }
 
     public Task<Result> DeleteCustomer(int customerId)
@@ -43,11 +40,11 @@ public class CustomerServices : ICustomerServices
         var customers = await _unitOfWork.CustomerRepository.GetAllAsync();
 
         if (customers == null)
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var customersDto = _mapper.Map<IEnumerable<CustomerResponseDTO>>(customers);
 
-        return Result.Success(customersDto, ReplyMessage.Success.Query);
+        return Result.Success(customersDto, ReplyMessages.Success.Query);
     }
 
     public async Task<Result<CustomerResponseDTO>> GetCustomerById(int customerId)
@@ -55,11 +52,11 @@ public class CustomerServices : ICustomerServices
         var customer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerId);
 
         if (customer == null)
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var customerResponse = _mapper.Map<CustomerResponseDTO>(customer);
 
-        return Result.Success(customerResponse, ReplyMessage.Success.Query);
+        return Result.Success(customerResponse, ReplyMessages.Success.Query);
     }
 
     public Task<Result> UpdateCustomer(UpdateCustomerRequestDTO customer)

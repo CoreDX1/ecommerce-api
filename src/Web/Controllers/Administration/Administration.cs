@@ -1,11 +1,8 @@
 using Application.Common.Interfaces;
-using Application.Common.Interfaces.Repositories;
 using Application.DTOs.Request.Product;
 using Application.DTOs.Response.Product;
 using Application.DTOs.Response.User;
-using Application.Interfaces;
 using Ardalis.Result;
-using Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,49 +13,51 @@ namespace Web.Controllers.Administration;
 [ApiController]
 public class Administration : ControllerBase
 {
-    private readonly IProductServices _productServices;
-    private readonly IUserServices _userServices;
+    private readonly IProductServices _productService;
+    private readonly IUserService _userService;
+    private readonly IUserRolesService _userRolesService;
 
-    public Administration(IProductServices productServices, IUserServices userRepository)
+    public Administration(IProductServices productService, IUserService userSerice, IUserRolesService userRolesService)
     {
-        _productServices = productServices;
-        _userServices = userRepository;
+        _productService = productService;
+        _userService = userSerice;
+        _userRolesService = userRolesService;
     }
 
     [HttpGet] // GET: api/Administration
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
     {
-        return await _productServices.GetAllProducts();
+        return await _productService.GetAllProducts();
     }
 
     [HttpGet("users")]
     public async Task<Result<IEnumerable<UserResponseDTO>>> GetAllUsers()
     {
-        return await _userServices.GetAllAsync();
+        return await _userService.GetAllAsync();
     }
 
     [HttpGet("users/{userId}")]
     public async Task<Result<UserResponseDTO>> GetUserById(int userId)
     {
-        return await _userServices.GetByIdAsync(userId);
+        return await _userService.GetByIdAsync(userId);
     }
 
     [HttpPost("products/create")]
     public async Task<Result<ProductResponseDTO>> CreateProduct([FromBody] CreateProductRequestDTO createProduct)
     {
-        return await _productServices.CreateProduct(createProduct);
+        return await _productService.CreateProduct(createProduct);
     }
 
     [HttpPut("products/update/{productId}")]
     public async Task<Result<ProductResponseDTO>> UpdateProduct([FromBody] UpdateProductRequestDTO updateProduct)
     {
-        return await _productServices.UpdateProduct(updateProduct);
+        return await _productService.UpdateProduct(updateProduct);
     }
 
     [HttpDelete("products/delete/{productId}")]
     public async Task<Result<ProductResponseDTO>> DeleteProduct(int productId)
     {
-        return await _productServices.DeleteProduct(productId);
+        return await _productService.DeleteProduct(productId);
     }
 
     [HttpPut] // PUT: api/Administration
@@ -68,9 +67,9 @@ public class Administration : ControllerBase
     }
 
     [HttpGet("users/{userId}/roles")]
-    public Task<Result<IEnumerable<string>>> GetRolesForUser(int userId)
+    public async Task<Result<IEnumerable<string>>> GetRolesForUser(int userId)
     {
-        throw new NotImplementedException();
+        return await _userRolesService.GetRolesForUser(userId);
     }
 
     [HttpDelete] // DELETE: api/Administration

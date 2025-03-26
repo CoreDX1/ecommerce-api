@@ -1,6 +1,5 @@
 using Application.Common.Interfaces.Persistence;
 using Application.Common.Interfaces.Repositories;
-using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 
 namespace Infrastructure.Repositories;
@@ -13,7 +12,7 @@ public class UnitOfWork : IUnitOfWork
 
     public ICustomerRepository CustomerRepository { get; }
 
-    public IUserServices UserRepository { get; }
+    public IUserRepository UserRepository { get; }
 
     public IUsersRolesRepository UsersRolesRepository { get; }
 
@@ -27,7 +26,7 @@ public class UnitOfWork : IUnitOfWork
         PostgresContext context,
         IProductRepository productRepository,
         ICustomerRepository customerRepository,
-        IUserServices userRepository,
+        IUserRepository userRepository,
         IUsersRolesRepository usersRolesRepository
     )
     {

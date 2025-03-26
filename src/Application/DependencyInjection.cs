@@ -1,8 +1,8 @@
 using System.Reflection;
 using Application.Common.Interfaces;
 using Application.Configuration;
+using Application.DTOs.Request.Product;
 using Application.DTOs.Request.User;
-using Application.Interfaces;
 using Application.Services;
 using Application.Validations;
 using FluentValidation;
@@ -18,6 +18,8 @@ public static class DependencyInjection
         // Add services
         services.AddScoped<IUserService, UserServices>();
         services.AddScoped<ICustomerServices, CustomerServices>();
+        services.AddScoped<IValidatorServices, ValidatorServices>();
+        services.AddScoped<IUserRolesService, UserRolesService>();
 
         // Generic Services
         services.AddScoped(typeof(IReadServiceAsync<,>), typeof(ReadServiceAsync<,>));
@@ -31,6 +33,9 @@ public static class DependencyInjection
 
         // Add FluentValidation
         services.AddScoped<IValidator<LoginUserRequestDTO>, LoginUserRequestValidations>();
+        services.AddScoped<IValidator<CreateProductRequestDTO>, CreateProductValidations>();
+
+        services.AddScoped<IValidator<UpdateProductRequestDTO>, UpdateProductValidations>();
 
         services.Configure<JwtConfig>(configuration.GetSection("Jwt"));
 

@@ -1,4 +1,4 @@
-using Application.Interfaces.Repositories;
+using Application.Common.Interfaces.Repositories;
 using Domain.Entity;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -10,19 +10,8 @@ public class UsersRolesRepository : Repository<UsersRole>, IUsersRolesRepository
     public UsersRolesRepository(PostgresContext context)
         : base(context) { }
 
-    public async Task<IEnumerable<string>> GetRoles(User user)
+    public async Task<IEnumerable<string>> GetRoles(int userId)
     {
-        var roles = await _context
-            .UsersRoles.Where(ur => ur.UserId == user.UserId)
-            .Include(ur => ur.Role)
-            .Select(ur => ur.Role.RoleName)
-            .ToListAsync();
-
-        if (roles == null)
-        {
-            return [];
-        }
-
-        return roles;
+        return await _context.UsersRoles.Where(ur => ur.UserId == userId).Include(ur => ur.Role).Select(ur => ur.Role.RoleName).ToListAsync();
     }
 }

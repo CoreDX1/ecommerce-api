@@ -1,16 +1,13 @@
 using System.Linq.Expressions;
 using Application.Common.Interfaces.Repositories;
 using Application.DTOs.Request.User;
-using Application.DTOs.Response.User;
-using Application.Interfaces.Repositories;
-using Ardalis.Result;
 using Domain.Entity;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class UserRepository : Repository<User>, IUserServices
+public class UserRepository : Repository<User>, IUserRepository
 {
     private readonly IRepository<Customer> _customerRepository;
 
@@ -68,35 +65,5 @@ public class UserRepository : Repository<User>, IUserServices
 
         await _context.SaveChangesAsync();
         return user;
-    }
-
-    public Task AddAsync(UserResponseDTO dto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(UserResponseDTO dto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Result<UserResponseDTO>> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Result<IEnumerable<UserResponseDTO>>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Result<IEnumerable<UserResponseDTO>>> GetByConditionAsync(Expression<Func<User, bool>> predicate)
-    {
-        throw new NotImplementedException();
     }
 }

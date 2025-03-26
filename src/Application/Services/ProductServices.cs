@@ -35,11 +35,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductByName(name);
 
         if (products == null || products.Any())
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Query);
+        return Result.Success(productResponse, ReplyMessages.Success.Query);
     }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetByPaginationAsync(int page, int recordsPerPage)
@@ -47,11 +47,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetByPaginationAsync(page, recordsPerPage);
 
         if (products == null || products.Any())
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Query);
+        return Result.Success(productResponse, ReplyMessages.Success.Query);
     }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetProductsByFilter(FilterProductRequestDTO filter)
@@ -59,11 +59,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByFilter(filter);
 
         if (products == null || products.Any())
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Query);
+        return Result.Success(productResponse, ReplyMessages.Success.Query);
     }
 
     public async Task<Result<IEnumerable<ProductResponseDTO>>> GetAllProducts()
@@ -71,11 +71,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllProducts();
 
         if (products == null || products.Any())
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Query);
+        return Result.Success(productResponse, ReplyMessages.Success.Query);
     }
 
     // Esto tiene que estar en el Servico generico
@@ -90,13 +90,13 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         Product? existingProduct = await _unitOfWork.ProductRepository.FindOneAsync(x => x.Name.ToLower().Equals(createProduct.Name.ToLower()));
 
         if (existingProduct != null)
-            return Result.Error(ReplyMessage.Error.Exists);
+            return Result.Error(ReplyMessages.Error.Exists);
 
         await AddAsync(createProduct);
 
         var productResponse = _mapper.Map<ProductResponseDTO>(existingProduct);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Save);
+        return Result.Success(productResponse, ReplyMessages.Success.Save);
     }
 
     // Que los nombres de los productos no se repitan
@@ -112,7 +112,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
 
         var productResponse = _mapper.Map<ProductResponseDTO>(productUpdated);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Query);
+        return Result.Success(productResponse, ReplyMessages.Success.Query);
     }
 
     public async Task<Result<ProductResponseDTO>> DeleteProduct(int productId)
@@ -121,11 +121,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
 
         var productDeleted = await _unitOfWork.ProductRepository.FindOneAsync(x => x.ProductId == productId);
         if (productDeleted == null)
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<ProductResponseDTO>(productDeleted);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Delete);
+        return Result.Success(productResponse, ReplyMessages.Success.Delete);
     }
 
     public async Task<Result<ProductResponseDTO>> GetProductById(int productId)
@@ -133,11 +133,11 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
         Product? product = await _unitOfWork.ProductRepository.FindOneAsync(x => x.ProductId == productId);
 
         if (product == null)
-            return Result.NotFound(ReplyMessage.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<ProductResponseDTO>(product);
 
-        return Result.Success(productResponse, ReplyMessage.Success.Query);
+        return Result.Success(productResponse, ReplyMessages.Success.Query);
     }
 
     public Task<Result<ProductResponseDTO>> GetProductByCategoryId(int categoryId)

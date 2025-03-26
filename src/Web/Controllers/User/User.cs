@@ -1,7 +1,6 @@
 using Application.Common.Interfaces;
 using Application.DTOs.Request.User;
 using Application.DTOs.Response.User;
-using Application.Interfaces;
 using Ardalis.Result;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using Application.Interfaces.Repositories;
+using Application.Common.Interfaces.Repositories;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,7 +52,11 @@ public class Repository<TEntity> : IRepository<TEntity>
         return _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> expression, FindOptions? findOptions = null, CancellationToken cancellationToken = default)
+    public async Task<TEntity?> FindOneAsync(
+        Expression<Func<TEntity, bool>> expression,
+        FindOptions? findOptions = null,
+        CancellationToken cancellationToken = default
+    )
     {
         return await _context.Set<TEntity>().FindAsync(expression, findOptions, cancellationToken);
     }
