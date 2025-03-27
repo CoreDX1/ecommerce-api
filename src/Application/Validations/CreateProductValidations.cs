@@ -7,8 +7,8 @@ public class CreateProductValidations : AbstractValidator<CreateProductRequestDT
 {
     public CreateProductValidations()
     {
-        RuleFor(x => x.Name).NotEmpty();
-        RuleFor(x => x.Description).NotEmpty();
-        RuleFor(x => x.Price).GreaterThan(0);
+        RuleFor(x => x.Name).NotEmpty().WithMessage("Product name is required for create");
+        RuleFor(x => x.Description).NotEmpty().WithMessage("Product description is required for create");
+        RuleFor(x => x.Price).GreaterThan(0).WithMessage("Product price is required for create");
     }
 }

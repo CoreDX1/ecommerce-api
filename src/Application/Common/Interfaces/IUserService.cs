@@ -9,4 +9,6 @@ public interface IUserService : IGenericServiceAsync<User, UserResponseDTO>
 {
     Task<Result<UserResponseDTO>> RegisterAsync(RegisterUserRequestDTO createUser);
     Task<Result<UserResponseDTO>> LoginAsync(LoginUserRequestDTO loginUser);
+    // Task<Result<UserResponseDTO>> ChangePasswordAsync(ChangePasswordRequestDTO changePassword);
+    // Task<Result<UserResponseDTO>> UpdateProfileAsync(UpdateProfileRequestDTO updateProfile);
 }

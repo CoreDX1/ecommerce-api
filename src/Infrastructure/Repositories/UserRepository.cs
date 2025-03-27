@@ -36,7 +36,7 @@ public class UserRepository : Repository<User>, IUserRepository
         {
             CustomerId = customerCreated!.CustomerId,
             Username = createUser.Username,
-            PasswordHash = PasswordHash(createUser.PasswordHash),
+            PasswordHash = PasswordHash(createUser.Password),
             Email = createUser.Email,
             IsActive = true,
         };

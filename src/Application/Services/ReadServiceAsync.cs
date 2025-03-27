@@ -44,7 +44,7 @@ public class ReadServiceAsync<TEntity, TDto> : IReadServiceAsync<TEntity, TDto>
         return Result.Success(entityResponse, ReplyMessages.Success.Query);
     }
 
-    public async Task<Result<IEnumerable<TDto>>> GetByConditionAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<Result<IEnumerable<TDto>>> FindAsync(Expression<Func<TEntity, bool>> predicate)
     {
         var entities = await _unitOfWork.Repository<TEntity>().GetAllAsync();
         var entitiesResponse = _mapper.Map<IEnumerable<TDto>>(entities);

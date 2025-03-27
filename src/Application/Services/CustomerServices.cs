@@ -20,10 +20,14 @@ public class CustomerServices : ICustomerServices
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<CustomerResponseDTO>> CreateCustomer(CreateCustomerRequestDTO customer)
+    public async Task<Result<CustomerResponseDTO>> CreateCustomer(CreateCustomerRequestDTO createCustomer)
     {
-        var customerDTo = _mapper.Map<Customer>(customer);
+        var customerDTo = _mapper.Map<Customer>(createCustomer);
         customerDTo.RegistrationDate = DateTime.Now;
+
+        bool emailExists = await _unitOfWork.CustomerRepository.AnyAsync(c => c.Email.ToLower() == createCustomer.Email.ToLower());
+        if (emailExists)
+            return Result.Conflict($"Customer with email '{createCustomer.Email}' already exists.");
 
         await _unitOfWork.CustomerRepository.AddAsync(customerDTo);
 

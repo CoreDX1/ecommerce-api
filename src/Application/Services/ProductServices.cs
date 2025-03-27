@@ -58,7 +58,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByFilter(filter);
 
-        if (products == null || products.Any())
+        if (products == null || !products.Any())
             return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
@@ -70,7 +70,7 @@ public class ProductServices : GenericServiceAsync<Product, ProductResponseDTO>,
     {
         IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllProducts();
 
-        if (products == null || products.Any())
+        if (products == null || !products.Any())
             return Result.NotFound(ReplyMessages.Error.NotFound);
 
         var productResponse = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);

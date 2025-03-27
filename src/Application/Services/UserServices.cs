@@ -41,12 +41,12 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 
     public async Task<Result<UserResponseDTO>> RegisterAsync(RegisterUserRequestDTO createUser)
     {
-        User newUser = await _unitOfWork.UserRepository.RegisterUser(createUser);
-
         var validationResult = await _createUserValidator.ValidateAsync(createUser);
 
         if (!validationResult.IsValid)
             return Result.Invalid(_validatorServices.GetValidationError(validationResult));
+
+        User newUser = await _unitOfWork.UserRepository.RegisterUser(createUser);
 
         if (newUser == null)
             return Result.NotFound(ReplyMessages.Error.NotFound);
@@ -91,7 +91,7 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
 
         foreach (var roleName in userRoles)
         {
-            claims.Add(new Claim("role", roleName));
+            // claims.Add(new Claim("role", roleName));
             claims.Add(new Claim(ClaimTypes.Role, roleName));
         }
 

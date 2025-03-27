@@ -7,7 +7,7 @@ public class LoginUserRequestValidations : AbstractValidator<LoginUserRequestDTO
 {
     public LoginUserRequestValidations()
     {
-        RuleFor(x => x.Email).NotEmpty().EmailAddress();
-        RuleFor(x => x.Password).NotEmpty();
+        RuleFor(x => x.Email).NotEmpty().EmailAddress().WithMessage("Email is not valid");
+        RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required");
     }
 }

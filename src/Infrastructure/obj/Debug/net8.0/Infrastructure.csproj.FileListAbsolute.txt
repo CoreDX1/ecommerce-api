@@ -17,3 +17,4 @@
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastructure.pdb
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastructure.genruntimeconfig.cache
 /home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/ref/Infrastructure.dll
+/home/christian/Desktop/Projects/E-commerce/src/Infrastructure/obj/Debug/net8.0/Infrastructure.sourcelink.json
