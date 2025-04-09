@@ -1,9 +1,7 @@
 using System.Text;
 using Application;
-using Application.Configuration;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -51,11 +49,7 @@ builder.Services.AddSwaggerGen(options =>
             {
                 new OpenApiSecurityScheme
                 {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer",
-                    },
+                    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" },
                 },
                 Array.Empty<string>()
             },
@@ -82,9 +76,7 @@ builder
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"], // Check this
             ValidAudience = builder.Configuration["Jwt:Audience"], // Check this
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!)
-            ), // Check this and the "!" operator
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!)), // Check this and the "!" operator
         };
     });
 

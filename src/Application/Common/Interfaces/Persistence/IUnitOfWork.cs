@@ -8,7 +8,10 @@ public interface IUnitOfWork : IDisposable
     IUsersRolesRepository UsersRolesRepository { get; }
     ICustomerRepository CustomerRepository { get; }
     IUserRepository UserRepository { get; }
+    IOrderRepository OrderRepository { get; }
 
     IRepository<TEntity> Repository<TEntity>()
         where TEntity : class;
+
+    // Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

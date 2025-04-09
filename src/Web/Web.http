@@ -29,6 +29,6 @@ POST {{Web_HostAddress}}/api/user/login
 Content-Type: application/json
 
 {
-    "email": "chismaquis@gmail.com",
-    "password": "index"
+    "email": "",
+    "password": ""
 }

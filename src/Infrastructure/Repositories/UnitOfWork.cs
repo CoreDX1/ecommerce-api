@@ -16,6 +16,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IUsersRolesRepository UsersRolesRepository { get; }
 
+    public IOrderRepository OrderRepository { get; }
+
     public IRepository<TEntity> Repository<TEntity>()
         where TEntity : class
     {
@@ -27,7 +29,8 @@ public class UnitOfWork : IUnitOfWork
         IProductRepository productRepository,
         ICustomerRepository customerRepository,
         IUserRepository userRepository,
-        IUsersRolesRepository usersRolesRepository
+        IUsersRolesRepository usersRolesRepository,
+        IOrderRepository orderRepository
     )
     {
         _context = context;
@@ -35,6 +38,7 @@ public class UnitOfWork : IUnitOfWork
         CustomerRepository = customerRepository;
         UserRepository = userRepository;
         UsersRolesRepository = usersRolesRepository;
+        OrderRepository = orderRepository;
     }
 
     public void Dispose()

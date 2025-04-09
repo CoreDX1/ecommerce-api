@@ -1,6 +1,7 @@
 using System.Reflection;
 using Application.Common.Interfaces;
 using Application.Configuration;
+using Application.DTOs.Request.Order;
 using Application.DTOs.Request.Product;
 using Application.DTOs.Request.User;
 using Application.Services;
@@ -32,8 +33,12 @@ public static class DependencyInjection
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         // Add FluentValidation
-        services.AddScoped<IValidator<LoginUserRequestDTO>, LoginUserRequestValidations>();
-        services.AddScoped<IValidator<CreateProductRequestDTO>, CreateProductValidations>();
+        // services.AddScoped<IValidator<LoginUserRequestDTO>, LoginUserRequestValidations>();
+        // services.AddScoped<IValidator<CreateProductRequestDTO>, CreateProductValidations>();
+        // services.AddScoped<IValidator<CreateOrderRequestDTO>, CreateOrderRequestValidator>();
+        // services.AddScoped<IValidator<UpdateOrderStatusRequestDTO>, UpdateOrderStatusRequestValidator>();
+
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddScoped<IValidator<UpdateProductRequestDTO>, UpdateProductValidations>();
 
