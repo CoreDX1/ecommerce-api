@@ -38,31 +38,31 @@ public class UserServices : GenericServiceAsync<User, UserResponseDTO>, IUserSer
         _jwtTokenGenerator = jwtTokenGenerator;
     }
 
-    public async Task<Result<UserResponseDTO>> RegisterAsync(RegisterUserRequestDTO createUser)
+    public async Task<Result<UserResponseDTO>> RegisterAsync(RegisterUserRequestDTO registerRequest)
     {
-        var validationResult = await _createUserValidator.ValidateAsync(createUser);
+        var validationResult = await _createUserValidator.ValidateAsync(registerRequest);
 
         if (!validationResult.IsValid)
             return Result.Invalid(_validatorServices.GetValidationError(validationResult));
 
-        User newUser = await _unitOfWork.UserRepository.RegisterUser(createUser);
+        User newUser = await _unitOfWork.UserRepository.RegisterUser(registerRequest);
 
         if (newUser == null)
-            return Result.NotFound(ReplyMessages.Error.NotFound);
+            return Result.NotFound(ReplyMessages.Error.CreateFailed);
 
         var userResponse = _mapper.Map<UserResponseDTO>(newUser);
 
         return Result.Created(userResponse, ReplyMessages.Success.Save);
     }
 
-    public async Task<Result<UserResponseDTO>> LoginAsync(LoginUserRequestDTO loginUser)
+    public async Task<Result<UserResponseDTO>> LoginAsync(LoginUserRequestDTO loginRequest)
     {
-        var validationResult = await _validator.ValidateAsync(loginUser);
+        var validationResult = await _validator.ValidateAsync(loginRequest);
 
         if (!validationResult.IsValid)
             return _validatorServices.GetInvalidResult(validationResult);
 
-        User authenticatedUser = await _unitOfWork.UserRepository.AuthenticateAsync(loginUser);
+        User authenticatedUser = await _unitOfWork.UserRepository.AuthenticateAsync(loginRequest);
 
         if (authenticatedUser == null)
             return Result.Unauthorized(ReplyMessages.Validate.ValidateError);

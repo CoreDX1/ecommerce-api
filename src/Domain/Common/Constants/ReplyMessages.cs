@@ -25,6 +25,7 @@ public class ReplyMessages
         public const string BadRequest = "Solicitud incorrecta";
         public const string Unauthorized = "Acceso no autorizado";
         public const string Forbidden = "Acción no permitida";
+        public const string CreateFailed = "Error al crear el registro";
     }
 
     public static class Validate
