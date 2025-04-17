@@ -65,4 +65,78 @@ public class UserRepository : Repository<User>, IUserRepository
         await _context.SaveChangesAsync();
         return user;
     }
+
+    public async Task<User> GetUserByEmailAsync(string email)
+    {
+        return await SingleOrDefaultAsync(x => x.Email == email);
+    }
+
+    public async Task<User> GetUserByUsernameAsync(string username)
+    {
+        return await SingleOrDefaultAsync(x => x.Username == username);
+    }
+
+    public async Task<bool> EmailExistsAsync(string email)
+    {
+        return await AnyAsync(x => x.Email == email);
+    }
+
+    public async Task<bool> UsernameExistsAsync(string username)
+    {
+        return await AnyAsync(x => x.Username == username);
+    }
+
+    public async Task<bool> UpdatePasswordAsync(int userId, string newPasswordHash)
+    {
+        var user = await GetByIdAsync(userId);
+        if (user == null)
+            return false;
+
+        user.PasswordHash = PasswordHash(newPasswordHash);
+        await UpdateAsync(user);
+        return true;
+    }
+
+    public async Task<bool> UpdateUserProfileAsync(User user)
+    {
+        try
+        {
+            await UpdateAsync(user);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public async Task<bool> DeactivateUserAsync(int userId)
+    {
+        var user = await GetByIdAsync(userId);
+        if (user == null)
+            return false;
+
+        user.IsActive = false;
+        await UpdateAsync(user);
+        return true;
+    }
+
+    public async Task<bool> ReactivateUserAsync(int userId)
+    {
+        var user = await GetByIdAsync(userId);
+        if (user == null)
+            return false;
+
+        user.IsActive = true;
+        await UpdateAsync(user);
+        return true;
+    }
+
+    public async Task<IEnumerable<User>> GetUsersByRoleAsync(string role)
+    {
+        return await _context.Users
+            .Include(u => u.UserRoles)
+            .Where(u => u.UserRoles.Any(ur => ur.Role.Name == role))
+            .ToListAsync();
+    }
 }
