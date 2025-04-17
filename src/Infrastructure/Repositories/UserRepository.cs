@@ -132,11 +132,8 @@ public class UserRepository : Repository<User>, IUserRepository
         return true;
     }
 
-    public async Task<IEnumerable<User>> GetUsersByRoleAsync(string role)
+    public Task<IEnumerable<User>> GetUsersByRoleAsync(string role)
     {
-        return await _context.Users
-            .Include(u => u.UserRoles)
-            .Where(u => u.UserRoles.Any(ur => ur.Role.Name == role))
-            .ToListAsync();
+        throw new NotImplementedException();
     }
 }
