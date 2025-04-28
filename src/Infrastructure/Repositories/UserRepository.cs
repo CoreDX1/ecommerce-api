@@ -68,12 +68,21 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public async Task<User> GetUserByEmailAsync(string email)
     {
-        return await SingleOrDefaultAsync(x => x.Email == email);
+        var user = await SingleOrDefaultAsync(x => x.Email == email);
+        if (user == null)
+            return null!;
+
+        return user;
     }
 
     public async Task<User> GetUserByUsernameAsync(string username)
     {
-        return await SingleOrDefaultAsync(x => x.Username == username);
+        User? user = await SingleOrDefaultAsync(x => x.Username == username);
+
+        if (user == null)
+            return null!;
+
+        return user;
     }
 
     public async Task<bool> EmailExistsAsync(string email)
