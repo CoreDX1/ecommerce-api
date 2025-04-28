@@ -75,3 +75,6 @@
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/ClientApp/tsconfig.app.json
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/ClientApp/tsconfig.json
 /home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/ClientApp/tsconfig.spec.json
+/home/christian/Desktop/Projects/E-commerce/src/Web/bin/Debug/net8.0/Web.staticwebassets.endpoints.json
+/home/christian/Desktop/Projects/E-commerce/src/Web/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/home/christian/Desktop/Projects/E-commerce/src/Web/obj/Debug/net8.0/staticwebassets/msbuild.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
