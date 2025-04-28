@@ -1,14 +1,13 @@
 using System.Reflection;
 using Application.Common.Interfaces;
 using Application.Configuration;
-using Application.DTOs.Request.Order;
 using Application.DTOs.Request.Product;
-using Application.DTOs.Request.User;
-using Application.Services;
+using Application.Services; // Ensure this using is present
 using Application.Validations;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace Application;
 
@@ -21,6 +20,7 @@ public static class DependencyInjection
         services.AddScoped<ICustomerServices, CustomerServices>();
         services.AddScoped<IValidatorServices, ValidatorServices>();
         services.AddScoped<IUserRolesService, UserRolesService>();
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>(); // <-- Add this line
 
         // Generic Services
         services.AddScoped(typeof(IReadServiceAsync<,>), typeof(ReadServiceAsync<,>));
